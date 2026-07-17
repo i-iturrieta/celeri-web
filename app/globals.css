@@ -1,26 +1,18 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Tokens de marca — valores PLACEHOLDER.
+ * Reemplazar por el kit de marca real (color primario, acento y tipografías)
+ * antes de publicar. Estos placeholders solo mantienen el sitio maquetable mientras tanto.
+ */
+@theme {
+  --color-brand: #1e3a5f;
+  --color-brand-dark: #14283f;
+  /* #f2994a (diseño original) da 2.2:1 de contraste con texto blanco — falla WCAG AA (4.5:1).
+     Oscurecido a #a85614 (5.2:1) para cumplir accesibilidad manteniendo el tono cálido. */
+  --color-accent: #a85614;
+  --color-accent-dark: #8a4610;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 }
