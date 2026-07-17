@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ExternalLink } from "lucide-react";
 import type { CaseStudy } from "@/content/cases";
 
 type CaseCardProps = {
@@ -8,46 +7,34 @@ type CaseCardProps = {
 
 export default function CaseCard({ caseStudy }: CaseCardProps) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-black/10">
-      <div className="grid grid-cols-1 gap-1 sm:grid-cols-3">
-        {caseStudy.images.map((src) => (
-          <div key={src} className="relative aspect-video">
-            <Image
-              src={src}
-              alt={`Captura del sitio de ${caseStudy.client}`}
-              fill
-              className="object-cover"
-            />
-          </div>
-        ))}
+    <div className="mt-9 flex flex-wrap items-center gap-8 rounded-[18px] border border-ink/10 bg-cream-light p-5">
+      <div className="relative h-[280px] flex-1 basis-80 overflow-hidden rounded-xl">
+        <Image
+          src={caseStudy.images[0]}
+          alt={`Captura del sitio de ${caseStudy.client}`}
+          fill
+          className="object-cover"
+        />
       </div>
 
-      <div className="p-6">
-        <div className="flex flex-wrap gap-2">
+      <div className="flex-1 basis-80 py-3 pr-0 sm:pr-5">
+        <div className="mb-4 flex flex-wrap gap-2">
           {caseStudy.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-brand/10 px-3 py-1 text-xs font-medium text-brand"
+              className="rounded-full bg-brand-tint px-3 py-1.5 text-xs font-bold tracking-[0.04em] text-brand"
             >
               {tag}
             </span>
           ))}
         </div>
 
-        <h3 className="mt-4 font-display text-xl font-semibold text-black">
+        <h3 className="font-display text-2xl font-semibold text-ink">
           {caseStudy.client}
         </h3>
-        <p className="mt-2 text-sm text-black/70">{caseStudy.summary}</p>
-
-        <a
-          href={caseStudy.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline"
-        >
-          Ver sitio en vivo
-          <ExternalLink className="h-4 w-4" />
-        </a>
+        <p className="mt-3 text-[15.5px] leading-relaxed text-ink/72">
+          {caseStudy.summary}
+        </p>
       </div>
     </div>
   );

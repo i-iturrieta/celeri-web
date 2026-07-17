@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Manrope } from "next/font/google";
+import { Lora, Karla } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -7,14 +7,17 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 import { site } from "@/content/site";
 import { buildJsonLd } from "@/lib/jsonld";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const karla = Karla({
+  variable: "--font-karla",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -42,9 +45,9 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${manrope.variable} h-full antialiased`}
+      className={`${lora.variable} ${karla.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-sans">
+      <body className="flex min-h-full flex-col bg-cream font-sans text-ink">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

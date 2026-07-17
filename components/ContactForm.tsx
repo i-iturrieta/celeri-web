@@ -68,7 +68,7 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-4 text-left">
       <div>
-        <label htmlFor="nombre" className="block text-sm font-medium text-black">
+        <label htmlFor="nombre" className="block text-sm font-medium text-ink">
           Nombre
         </label>
         <input
@@ -76,12 +76,12 @@ export default function ContactForm() {
           name="nombre"
           type="text"
           required
-          className="mt-1 w-full rounded-lg border border-black/15 px-3 py-2 text-sm focus:border-brand focus:outline-none"
+          className="mt-1 w-full rounded-lg border border-ink/15 px-3 py-2 text-sm focus:border-brand focus:outline-none"
         />
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-black">
+        <label htmlFor="email" className="block text-sm font-medium text-ink">
           Correo
         </label>
         <input
@@ -89,12 +89,12 @@ export default function ContactForm() {
           name="email"
           type="email"
           required
-          className="mt-1 w-full rounded-lg border border-black/15 px-3 py-2 text-sm focus:border-brand focus:outline-none"
+          className="mt-1 w-full rounded-lg border border-ink/15 px-3 py-2 text-sm focus:border-brand focus:outline-none"
         />
       </div>
 
       <div>
-        <label htmlFor="mensaje" className="block text-sm font-medium text-black">
+        <label htmlFor="mensaje" className="block text-sm font-medium text-ink">
           Mensaje
         </label>
         <textarea
@@ -102,7 +102,7 @@ export default function ContactForm() {
           name="mensaje"
           rows={4}
           required
-          className="mt-1 w-full rounded-lg border border-black/15 px-3 py-2 text-sm focus:border-brand focus:outline-none"
+          className="mt-1 w-full rounded-lg border border-ink/15 px-3 py-2 text-sm focus:border-brand focus:outline-none"
         />
       </div>
 
@@ -127,7 +127,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-105 disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex items-center justify-center rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-ink-inverse transition-transform hover:scale-105 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "loading" ? "Enviando…" : "Enviar mensaje"}
       </button>

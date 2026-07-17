@@ -13,14 +13,16 @@ export default function CTASection({
   message,
 }: CTASectionProps) {
   return (
-    <div className="rounded-2xl bg-brand px-6 py-10 text-center text-white sm:px-12">
-      <h2 className="font-display text-2xl font-bold sm:text-3xl">{title}</h2>
-      <p className="mt-3 text-white/80">{subtitle}</p>
+    <div className="rounded-2xl bg-brand-dark px-6 py-10 text-center text-ink-inverse sm:px-12">
+      <h2 className="font-display text-2xl font-semibold sm:text-3xl">
+        {title}
+      </h2>
+      <p className="mt-3 text-ink-inverse/70">{subtitle}</p>
       <a
         href={waLink(message)}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-105"
+        className="mt-6 inline-flex items-center gap-2 rounded-lg bg-accent-strong px-6 py-3 text-sm font-semibold text-ink-inverse transition-transform hover:scale-105"
       >
         <MessageCircle className="h-5 w-5" />
         Escribir por WhatsApp
