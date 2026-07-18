@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import type { CaseStudy } from "@/content/cases";
 
 type CaseCardProps = {
@@ -8,14 +9,19 @@ type CaseCardProps = {
 export default function CaseCard({ caseStudy }: CaseCardProps) {
   return (
     <div className="mt-9 flex flex-wrap items-center gap-8 rounded-[18px] border border-ink/10 bg-cream-light p-5">
-      <div className="relative h-[280px] flex-1 basis-80 overflow-hidden rounded-xl">
+      <a
+        href={caseStudy.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative h-[280px] flex-1 basis-80 overflow-hidden rounded-xl"
+      >
         <Image
-          src={caseStudy.images[0]}
+          src={caseStudy.image}
           alt={`Captura del sitio de ${caseStudy.client}`}
           fill
           className="object-cover"
         />
-      </div>
+      </a>
 
       <div className="flex-1 basis-80 py-3 pr-0 sm:pr-5">
         <div className="mb-4 flex flex-wrap gap-2">
@@ -35,6 +41,16 @@ export default function CaseCard({ caseStudy }: CaseCardProps) {
         <p className="mt-3 text-[15.5px] leading-relaxed text-ink/72">
           {caseStudy.summary}
         </p>
+
+        <a
+          href={caseStudy.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-brand"
+        >
+          Visitar sitio
+          <ArrowUpRight size={17} />
+        </a>
       </div>
     </div>
   );
