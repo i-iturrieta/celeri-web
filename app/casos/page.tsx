@@ -5,7 +5,6 @@ import Container from "@/components/Container";
 import SectionHeading from "@/components/SectionHeading";
 import CaseCard from "@/components/CaseCard";
 import CTASection from "@/components/CTASection";
-import Testimonials from "@/components/Testimonials";
 
 const DESCRIPTION = `Sitios web que he construido para negocios de la ${site.regionShort}: qué problema tenían, qué hice y qué cambió después.`;
 
@@ -42,9 +41,6 @@ export default function CasesPage() {
               headingLevel="h2"
             />
           ))}
-        </div>
-        <div className="mt-12">
-          <Testimonials />
         </div>
       </Container>
 

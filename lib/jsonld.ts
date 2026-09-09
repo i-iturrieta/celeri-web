@@ -14,10 +14,6 @@ export function buildJsonLd() {
     url: site.domain,
     email: site.email,
     telephone: TELEPHONE,
-    /* Rango de precios en la notación de schema.org, no en pesos: no hay
-     * precios publicados en el sitio y no conviene inventar una cifra que
-     * después Google muestre como si fuera oficial. */
-    priceRange: "$$",
     areaServed: {
       "@type": "AdministrativeArea",
       name: site.region,
@@ -27,21 +23,14 @@ export function buildJsonLd() {
       addressRegion: site.addressRegion,
       addressCountry: site.addressCountry,
     },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-        ],
-        opens: "09:00",
-        closes: "19:00",
-      },
-    ],
     founder: { "@id": `${site.domain}/#person` },
+    /* Deliberadamente ausentes: `openingHours` y `priceRange`. Google puede
+     * mostrar estos campos como si fueran datos oficiales del negocio, así que
+     * solo deben ir si son ciertos. Para agregarlos:
+     *   priceRange: "$$",
+     *   openingHoursSpecification: [{ "@type": "OpeningHoursSpecification",
+     *     dayOfWeek: ["Monday", ...], opens: "09:00", closes: "19:00" }],
+     */
     /* `sameAs` solo debe listar perfiles que existan y estén vivos: una
      * referencia muerta no suma y sí resta confianza. Ver content/site.ts. */
     ...(site.instagram ? { sameAs: [site.instagram] } : {}),

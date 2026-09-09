@@ -10,7 +10,6 @@ import CaseCard from "@/components/CaseCard";
 import ServiceCard from "@/components/ServiceCard";
 import CTASection from "@/components/CTASection";
 import ProcessSteps from "@/components/ProcessSteps";
-import Testimonials from "@/components/Testimonials";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 
 const DESCRIPTION = `Diseño y desarrollo de sitios web para PyMEs de la ${site.regionShort}: páginas rápidas y profesionales que convierten visitas en clientes por WhatsApp.`;
@@ -127,9 +126,6 @@ export default function HomePage() {
             {clientCases.map((c, i) => (
               <CaseCard key={c.slug} caseStudy={c} priority={i === 0} />
             ))}
-          </div>
-          <div className="mt-10">
-            <Testimonials />
           </div>
         </Container>
       )}
