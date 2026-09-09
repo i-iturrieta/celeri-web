@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Celeri — celeri.cl
 
-## Getting Started
+Sitio de marca de **Celeri**: diseño y desarrollo de sitios web para PyMEs de la
+Región de Los Lagos.
 
-First, run the development server:
+Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · TypeScript. Desplegado en
+Vercel; cada push a `master` publica a producción.
+
+## Desarrollo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # build de producción
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+No hay variables de entorno: el sitio es completamente estático y todo el
+contacto ocurre por WhatsApp y correo, sin backend.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Estructura
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Ruta | Para qué |
+| --- | --- |
+| `app/` | Rutas del App Router, `sitemap.ts`, `robots.ts` y los iconos generados |
+| `components/` | Componentes de UI compartidos |
+| `content/` | Contenido editable sin tocar componentes: `site`, `services`, `cases`, `faq` |
+| `lib/` | Helpers: link de WhatsApp y JSON-LD |
+| `public/` | Imágenes de casos y OG images |
 
-## Learn More
+**Para editar el contenido del sitio, casi siempre basta con `content/`.**
+`content/site.ts` es la única fuente de verdad para el teléfono, el correo y la
+región: no repitas esos datos a mano en las páginas.
 
-To learn more about Next.js, take a look at the following resources:
+## Contacto
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+El sitio no tiene formulario ni endpoints. Los CTA apuntan a `wa.me` (armado en
+`lib/whatsapp.ts`) y a un `mailto:`. Si algún día vuelve un formulario, que sea
+por un servicio externo — no por un endpoint propio que haya que vigilar.
