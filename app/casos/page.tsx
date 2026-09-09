@@ -35,7 +35,12 @@ export default function CasesPage() {
       <Container as="section" className="pb-16">
         <div className="flex flex-col gap-8">
           {clientCases.map((c, i) => (
-            <CaseCard key={c.slug} caseStudy={c} priority={i === 0} />
+            <CaseCard
+              key={c.slug}
+              caseStudy={c}
+              priority={i === 0}
+              headingLevel="h2"
+            />
           ))}
         </div>
         <div className="mt-12">

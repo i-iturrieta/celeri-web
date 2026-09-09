@@ -10,9 +10,15 @@ type CaseCardProps = {
    * pliegue: es el LCP de esa página y no conviene que espere al lazy-load.
    */
   priority?: boolean;
+  /** Ver la nota en ServiceCard: evita el salto de h1 a h3. */
+  headingLevel?: "h2" | "h3";
 };
 
-export default function CaseCard({ caseStudy, priority = false }: CaseCardProps) {
+export default function CaseCard({
+  caseStudy,
+  priority = false,
+  headingLevel: Heading = "h3",
+}: CaseCardProps) {
   const detailHref = `/casos/${caseStudy.slug}`;
 
   return (
@@ -52,11 +58,11 @@ export default function CaseCard({ caseStudy, priority = false }: CaseCardProps)
           ))}
         </div>
 
-        <h3 className="font-display text-2xl font-semibold text-ink">
+        <Heading className="font-display text-2xl font-semibold text-ink">
           <Link href={detailHref} className="focus-ring transition-brand hover:text-brand">
             {caseStudy.client}
           </Link>
-        </h3>
+        </Heading>
         <p className="mt-3 text-small text-ink-muted">{caseStudy.summary}</p>
 
         <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2">

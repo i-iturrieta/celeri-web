@@ -28,12 +28,19 @@ type ServiceCardProps = {
   variant?: "numbered" | "detailed";
   /** Posición 1-based, solo para la variante `numbered`. */
   index?: number;
+  /**
+   * Nivel del encabezado de la tarjeta. `h3` sirve cuando la rejilla va bajo un
+   * <h2> de sección; usa `h2` cuando cuelga directo del <h1> de la página, o el
+   * documento salta de h1 a h3 y el lector de pantalla pierde la jerarquía.
+   */
+  headingLevel?: "h2" | "h3";
 };
 
 export default function ServiceCard({
   service,
   variant = "detailed",
   index,
+  headingLevel: Heading = "h3",
 }: ServiceCardProps) {
   const Icon = ICONS[service.icon] ?? Rocket;
 
@@ -50,7 +57,7 @@ export default function ServiceCard({
         >
           {String(index ?? 1).padStart(2, "0")}
         </p>
-        <h3 className="mb-2.5 text-h3 text-ink">{service.title}</h3>
+        <Heading className="mb-2.5 text-h3 text-ink">{service.title}</Heading>
         <p className="text-small text-ink-muted">{service.teaser}</p>
       </div>
     );
@@ -59,9 +66,9 @@ export default function ServiceCard({
   return (
     <div className={base}>
       <Icon className="h-8 w-8 text-brand" aria-hidden="true" />
-      <h3 className="mt-4 font-display text-h3 font-semibold text-ink">
+      <Heading className="mt-4 font-display text-h3 font-semibold text-ink">
         {service.title}
-      </h3>
+      </Heading>
       <p className="mt-2 text-small text-ink-muted">{service.problem}</p>
       <p className="mt-3 text-small font-medium text-brand">
         → {service.outcome}
