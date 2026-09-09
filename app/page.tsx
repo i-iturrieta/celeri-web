@@ -30,7 +30,6 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   const previewServices = services.slice(0, 3);
-  const featuredCase = clientCases[0];
 
   return (
     <>
@@ -109,15 +108,25 @@ export default function HomePage() {
         </div>
       </Container>
 
-      {featuredCase && (
+      {clientCases.length > 0 && (
         <Container as="section" className="pt-6 pb-20">
-          <SectionHeading
-            eyebrow="Caso real"
-            title="Un caso real, no una maqueta"
-            subtitle="Así trabajo cuando el proyecto pasa de la idea a producción."
-          />
-          <div className="mt-9">
-            <CaseCard caseStudy={featuredCase} />
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <SectionHeading
+              eyebrow="Casos reales"
+              title="Clientes reales, no maquetas"
+              subtitle="Así trabajo cuando el proyecto pasa de la idea a producción."
+            />
+            <Link
+              href="/casos"
+              className="focus-ring transition-brand text-small font-semibold whitespace-nowrap text-brand hover:text-accent-dark"
+            >
+              Ver todos los casos →
+            </Link>
+          </div>
+          <div className="mt-9 flex flex-col gap-8">
+            {clientCases.map((c, i) => (
+              <CaseCard key={c.slug} caseStudy={c} priority={i === 0} />
+            ))}
           </div>
           <div className="mt-10">
             <Testimonials />
