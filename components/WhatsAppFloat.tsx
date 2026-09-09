@@ -1,5 +1,14 @@
 import { waLink } from "@/lib/whatsapp";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 
+/**
+ * Acceso flotante a WhatsApp, solo en móvil.
+ *
+ * En desktop el header ya tiene un botón de WhatsApp siempre visible, así que el
+ * flotante solo tapaba contenido y sumaba un cuarto CTA idéntico a los otros
+ * tres. En móvil, en cambio, el header se colapsa tras el menú y el botón sí
+ * gana algo.
+ */
 export default function WhatsAppFloat() {
   return (
     <a
@@ -7,11 +16,9 @@ export default function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escribir por WhatsApp"
-      className="fixed right-7 bottom-7 z-50 flex h-14 w-[60px] items-center justify-center gap-[5px] rounded-tl-[28px] rounded-tr-[28px] rounded-br-[6px] rounded-bl-[28px] bg-accent-strong shadow-[0_14px_28px_-8px_oklch(0.22_0.03_60_/_0.4)] transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+      className="focus-ring transition-brand fixed right-5 bottom-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_14px_28px_-8px_oklch(0.22_0.03_60_/_0.45)] hover:scale-105 md:hidden"
     >
-      <span className="h-1.5 w-1.5 rounded-full bg-ink-inverse" />
-      <span className="h-1.5 w-1.5 rounded-full bg-ink-inverse" />
-      <span className="h-1.5 w-1.5 rounded-full bg-ink-inverse" />
+      <WhatsAppIcon className="h-7 w-7" />
     </a>
   );
 }

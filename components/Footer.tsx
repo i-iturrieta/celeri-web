@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { site } from "@/content/site";
 import { waLink } from "@/lib/whatsapp";
+import Container from "@/components/Container";
 
 const NAV_LINKS = [
   { href: "/", label: "Inicio" },
   { href: "/servicios", label: "Servicios" },
+  { href: "/casos", label: "Casos" },
   { href: "/sobre-mi", label: "Sobre mí" },
   { href: "/contacto", label: "Contacto" },
 ];
@@ -15,35 +17,34 @@ function formatPhone(whatsapp: string): string {
   return `+${digits.slice(0, 2)} ${digits.slice(2, 3)} ${digits.slice(3, 7)} ${digits.slice(7)}`;
 }
 
+const LINK_CLASS =
+  "focus-ring-inverse transition-brand text-small text-ink-inverse-muted hover:text-ink-inverse";
+
 export default function Footer() {
   return (
     <footer className="bg-brand-darker text-ink-inverse">
-      <div className="mx-auto grid max-w-[1120px] grid-cols-1 gap-12 px-6 py-16 sm:grid-cols-[2fr_1fr_1fr]">
+      <Container className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-[2fr_1fr_1fr]">
         <div>
           <Link
             href="/"
-            className="font-display text-2xl font-semibold italic"
+            className="focus-ring-inverse transition-brand font-display text-2xl font-semibold italic hover:text-brand-tint"
           >
             {site.name}
             <span className="text-accent">.</span>
           </Link>
-          <p className="mt-4 max-w-xs text-[15px] leading-relaxed text-ink-inverse/60">
-            Sitios web para negocios de la Región de Los Lagos que ya tienen
+          <p className="mt-4 max-w-xs text-small text-ink-inverse-muted">
+            Sitios web para negocios de la {site.regionShort} que ya tienen
             clientes y necesitan un lugar propio donde mostrarse.
           </p>
         </div>
 
         <div>
-          <p className="mb-4 text-[13px] font-bold tracking-[0.08em] text-ink-inverse/50 uppercase">
+          <p className="mb-4 text-eyebrow text-ink-inverse-subtle uppercase">
             Navegación
           </p>
-          <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col items-start gap-2.5">
             {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[15px] text-ink-inverse/85"
-              >
+              <Link key={link.href} href={link.href} className={LINK_CLASS}>
                 {link.label}
               </Link>
             ))}
@@ -51,33 +52,30 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="mb-4 text-[13px] font-bold tracking-[0.08em] text-ink-inverse/50 uppercase">
+          <p className="mb-4 text-eyebrow text-ink-inverse-subtle uppercase">
             Contacto
           </p>
-          <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col items-start gap-2.5">
             <a
               href={waLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[15px] text-ink-inverse/85"
+              className={LINK_CLASS}
             >
               {formatPhone(site.whatsapp)}
             </a>
-            <a
-              href={`mailto:${site.email}`}
-              className="text-[15px] text-ink-inverse/85"
-            >
+            <a href={`mailto:${site.email}`} className={LINK_CLASS}>
               {site.email}
             </a>
           </div>
         </div>
-      </div>
+      </Container>
 
-      <div className="mx-auto max-w-[1120px] border-t border-ink-inverse/15 px-6 py-8">
-        <p className="text-[13px] text-ink-inverse/50">
-          © 2026 {site.name}. Hecho en {site.region}.
+      <Container className="border-t border-ink-inverse/15 py-8">
+        <p className="text-[13px] text-ink-inverse-subtle">
+          © {new Date().getFullYear()} {site.name}. Hecho en {site.region}.
         </p>
-      </div>
+      </Container>
     </footer>
   );
 }

@@ -1,11 +1,20 @@
 @import "tailwindcss";
 
 /*
- * Tokens de marca "Celeri" (del proyecto de diseño Celeri-Inicio).
- * accent-strong es una versión oscurecida del acento para fondos de botones con
- * texto claro encima: el acento base solo da ~3.4:1 de contraste ahí, bajo WCAG AA (4.5:1).
+ * Sistema de diseño Celeri.
+ *
+ * Regla: ningún componente inventa un tamaño, un color de texto atenuado ni una
+ * transición propia. Todo sale de los tokens de abajo. Si necesitas un valor que
+ * no está, agrégalo aquí primero.
  */
+
 @theme {
+  /* --- Color -------------------------------------------------------------
+   * accent-strong y accent-dark son versiones oscurecidas del acento. El acento
+   * base solo da 3.45:1 sobre cream — suficiente para texto grande o adornos,
+   * insuficiente para texto (AA pide 4.5:1). Para texto o iconografía con
+   * significado sobre fondo claro, usa accent-dark (5.45:1).
+   */
   --color-brand: oklch(0.34 0.06 195);
   --color-brand-dark: oklch(0.22 0.045 195);
   --color-brand-darker: oklch(0.18 0.04 195);
@@ -21,10 +30,114 @@
   --color-ink: oklch(0.22 0.03 60);
   --color-ink-inverse: oklch(0.97 0.015 80);
 
+  /* Texto atenuado. Antes esto vivía como ink/68, /70, /72 y /85 repartidos a
+   * mano por los componentes. Ambos superan AA sobre cream y cream-light:
+   * muted 6.67:1, subtle 5.16:1. No uses opacidades sueltas sobre ink. */
+  --color-ink-muted: oklch(0.46 0.03 60);
+  --color-ink-subtle: oklch(0.52 0.03 60);
+
+  /* Equivalentes sobre fondo oscuro (footer y bandas de CTA). */
+  --color-ink-inverse-muted: oklch(0.78 0.012 80);
+  --color-ink-inverse-subtle: oklch(0.66 0.01 80);
+
+  /* --- Tipografía --------------------------------------------------------
+   * Una sola escala para las cuatro páginas. Antes el home usaba clamp() y las
+   * páginas internas text-4xl plano, así que parecían dos sitios distintos.
+   */
   --font-sans: var(--font-karla), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-lora), ui-serif, Georgia, serif;
+
+  --text-display: clamp(36px, 5.5vw, 58px);
+  --text-display--line-height: 1.08;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 600;
+
+  --text-h1: clamp(32px, 4.6vw, 46px);
+  --text-h1--line-height: 1.12;
+  --text-h1--letter-spacing: -0.015em;
+  --text-h1--font-weight: 600;
+
+  --text-h2: clamp(26px, 3.4vw, 34px);
+  --text-h2--line-height: 1.2;
+  --text-h2--font-weight: 600;
+
+  --text-h3: 19px;
+  --text-h3--line-height: 1.35;
+  --text-h3--font-weight: 700;
+
+  --text-lead: 18px;
+  --text-lead--line-height: 1.65;
+
+  --text-body: 16px;
+  --text-body--line-height: 1.7;
+
+  --text-small: 15px;
+  --text-small--line-height: 1.65;
+
+  --text-eyebrow: 13px;
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: 0.08em;
+  --text-eyebrow--font-weight: 700;
+
+  /* --- Movimiento --------------------------------------------------------
+   * Una duración y una curva para todo el sitio. */
+  --ease-brand: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --duration-brand: 180ms;
+}
+
+/* Transición estándar. Sustituye a los `transition-transform` sueltos que
+ * estaban repartidos por tres componentes con duraciones distintas. */
+@utility transition-brand {
+  transition-property: color, background-color, border-color, opacity,
+    box-shadow, transform;
+  transition-duration: var(--duration-brand);
+  transition-timing-function: var(--ease-brand);
+}
+
+/* Anillo de foco único para todo lo enfocable: links, botones y controles.
+ * Antes solo WhatsAppFloat tenía focus-visible. */
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* Igual, pero sobre fondos oscuros, donde el brand no se ve. */
+@utility focus-ring-inverse {
+  &:focus-visible {
+    outline: 2px solid var(--color-cream);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 }
 
 ::selection {
   background: oklch(0.63 0.15 45 / 0.25);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Quien pidió menos movimiento no recibe los hover:scale ni el scroll suave. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hover\:scale-105:hover,
+  .hover\:-translate-y-0\.5:hover {
+    transform: none !important;
+  }
 }

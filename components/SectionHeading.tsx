@@ -2,25 +2,30 @@ type SectionHeadingProps = {
   eyebrow?: string;
   title: string;
   subtitle?: string;
+  /** `h2` por defecto; usa `h1` cuando encabeza una página. */
+  as?: "h1" | "h2";
 };
 
 export default function SectionHeading({
   eyebrow,
   title,
   subtitle,
+  as: Tag = "h2",
 }: SectionHeadingProps) {
   return (
     <div>
       {eyebrow && (
-        <p className="mb-2.5 text-[13px] font-bold tracking-[0.08em] text-accent-dark uppercase">
+        <p className="mb-2.5 text-eyebrow text-accent-dark uppercase">
           {eyebrow}
         </p>
       )}
-      <h2 className="font-display text-[clamp(26px,3.4vw,34px)] font-semibold text-ink">
+      <Tag
+        className={`font-display text-ink ${Tag === "h1" ? "text-h1" : "text-h2"}`}
+      >
         {title}
-      </h2>
+      </Tag>
       {subtitle && (
-        <p className="mt-2.5 max-w-[480px] text-base text-ink/68">
+        <p className="mt-3 max-w-[520px] text-body text-ink-muted">
           {subtitle}
         </p>
       )}
