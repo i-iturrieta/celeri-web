@@ -92,7 +92,7 @@ export function renderOgImage({
               .
             </span>
           </div>
-          <span>{site.regionShort}</span>
+          <span>{site.tagline}</span>
         </div>
       </div>
     ),

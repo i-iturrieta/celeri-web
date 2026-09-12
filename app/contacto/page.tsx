@@ -7,7 +7,7 @@ import SectionHeading from "@/components/SectionHeading";
 import ProcessSteps from "@/components/ProcessSteps";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 
-const DESCRIPTION = `Contacta a ${site.name} en la ${site.regionShort}: escríbeme por WhatsApp o correo y conversemos 15 minutos gratis sobre tu negocio.`;
+const DESCRIPTION = `Contacta a ${site.name}: escríbeme por WhatsApp o correo y conversemos 15 minutos gratis sobre tu negocio.`;
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -26,8 +26,9 @@ export default function ContactPage() {
       <Container className="pt-16 pb-4 text-center">
         <h1 className="font-display text-h1 text-ink">Hablemos</h1>
         <p className="mx-auto mt-5 max-w-[560px] text-lead text-ink-muted">
-          Sin esperas y sin formularios que caen en un buzón que nadie mira. La
-          primera conversación, 15 minutos, es gratis y sin compromiso.
+          Nada de formularios que caen en un buzón que nadie revisa: escríbeme
+          directo. Los primeros 15 minutos de conversación son gratis y sin
+          compromiso.
         </p>
 
         {/* Dos vías, no más. Un formulario propio agregaba un punto de falla

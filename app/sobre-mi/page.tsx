@@ -5,7 +5,7 @@ import SectionHeading from "@/components/SectionHeading";
 import CTASection from "@/components/CTASection";
 import ProcessSteps from "@/components/ProcessSteps";
 
-const DESCRIPTION = `Diseño y desarrollo web en la ${site.regionShort}: entiendo tu negocio antes de diseñar nada, y respondes directo conmigo, no con un equipo de ventas.`;
+const DESCRIPTION = `Diseño y desarrollo web: entiendo tu negocio antes de diseñar nada, y hablas directo conmigo, no con un equipo de ventas.`;
 
 export const metadata: Metadata = {
   title: "Sobre mí",
@@ -28,10 +28,9 @@ export default function AboutPage() {
           title="Hablas conmigo, de principio a fin"
         />
         <p className="mt-6 max-w-[720px] text-lead text-ink-muted">
-          Hago sitios web para negocios de la {site.regionShort} que ya tienen
-          clientes, pero todavía no tienen un lugar propio y serio donde
-          mostrarse. No trabajo con plantillas genéricas ni como una agencia que
-          te pasa de mano en mano.
+          Hago sitios web para negocios que ya tienen clientes, pero todavía
+          no tienen un lugar propio donde mostrarse. Trabajo solo, así que
+          nadie te pasa de mano en mano.
         </p>
       </Container>
 

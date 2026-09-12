@@ -14,15 +14,6 @@ export function buildJsonLd() {
     url: site.domain,
     email: site.email,
     telephone: TELEPHONE,
-    areaServed: {
-      "@type": "AdministrativeArea",
-      name: site.region,
-    },
-    address: {
-      "@type": "PostalAddress",
-      addressRegion: site.addressRegion,
-      addressCountry: site.addressCountry,
-    },
     founder: { "@id": `${site.domain}/#person` },
     /* Deliberadamente ausentes: `openingHours` y `priceRange`. Google puede
      * mostrar estos campos como si fueran datos oficiales del negocio, así que

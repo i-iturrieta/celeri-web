@@ -33,8 +33,8 @@ export default function Footer() {
             <span className="text-accent">.</span>
           </Link>
           <p className="mt-4 max-w-xs text-small text-ink-inverse-muted">
-            Sitios web para negocios de la {site.regionShort} que ya tienen
-            clientes y necesitan un lugar propio donde mostrarse.
+            Sitios web para negocios que ya tienen clientes y necesitan un
+            lugar propio donde mostrarse.
           </p>
         </div>
 
@@ -73,7 +73,7 @@ export default function Footer() {
 
       <Container className="border-t border-ink-inverse/15 py-8">
         <p className="text-[13px] text-ink-inverse-subtle">
-          © {new Date().getFullYear()} {site.name}. Hecho en {site.region}.
+          © {new Date().getFullYear()} {site.name}.
         </p>
       </Container>
     </footer>

@@ -6,7 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 import CaseCard from "@/components/CaseCard";
 import CTASection from "@/components/CTASection";
 
-const DESCRIPTION = `Sitios web que he construido para negocios de la ${site.regionShort}: qué problema tenían, qué hice y qué cambió después.`;
+const DESCRIPTION = `Sitios web que he construido para negocios pequeños: qué problema tenían, qué hice y qué cambió después.`;
 
 export const metadata: Metadata = {
   title: "Casos",
@@ -26,8 +26,8 @@ export default function CasesPage() {
         <SectionHeading
           as="h1"
           eyebrow="Casos"
-          title="Trabajo publicado, no maquetas"
-          subtitle="Cada caso parte del problema que tenía el negocio, no de la tecnología que usé."
+          title="Sitios que están en línea ahora mismo"
+          subtitle="Cada caso empieza con el problema que tenía el negocio antes de escribirme."
         />
       </Container>
 

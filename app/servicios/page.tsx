@@ -10,7 +10,7 @@ import CTASection from "@/components/CTASection";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 
-const DESCRIPTION = `Landing pages, hub de redes, agendadores y webs informativas para negocios en la ${site.regionShort}.`;
+const DESCRIPTION = `Landing pages, hub de redes, agendadores y webs informativas para negocios pequeños.`;
 
 export const metadata: Metadata = {
   title: "Servicios",
@@ -32,8 +32,8 @@ export default function ServicesPage() {
         <SectionHeading
           as="h1"
           eyebrow="Servicios"
-          title="¿Qué necesitas resolver?"
-          subtitle="Cada servicio parte de un problema real, no de una lista de funciones. Elegimos juntos el que resuelve el tuyo."
+          title="Qué necesitas resolver"
+          subtitle="Elegimos juntos el que le sirve a tu negocio, no el que suena mejor."
         />
       </Container>
 

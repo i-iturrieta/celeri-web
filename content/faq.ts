@@ -45,8 +45,8 @@ export const faq: FaqItem[] = [
       "Menos de lo que crees: tu logo si tienes uno, fotos de tu negocio o tus productos, y media hora de conversación para contarme cómo funciona lo tuyo. Los textos los podemos escribir juntos — de hecho es mejor, porque escribir la página suele ordenar cómo explicas tu negocio.",
   },
   {
-    question: "¿Trabajas solo con negocios de la Región de Los Lagos?",
+    question: "¿Trabajas con negocios de cualquier lugar?",
     answer:
-      "Es donde estoy y donde conozco el terreno, pero el trabajo es remoto de principio a fin, así que la distancia no cambia nada. Si tu negocio está en otra región y te hace sentido cómo trabajo, conversemos igual.",
+      "Sí. Todo el proceso, desde la primera conversación hasta la entrega, funciona a distancia, así que dónde esté tu negocio no cambia nada.",
   },
 ];

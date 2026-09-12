@@ -12,11 +12,11 @@ import CTASection from "@/components/CTASection";
 import ProcessSteps from "@/components/ProcessSteps";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 
-const DESCRIPTION = `Diseño y desarrollo de sitios web para PyMEs de la ${site.regionShort}: páginas rápidas y profesionales que convierten visitas en clientes por WhatsApp.`;
+const DESCRIPTION = `Diseño y desarrollo de sitios web para negocios pequeños: páginas simples y rápidas que llevan a los visitantes a escribirte por WhatsApp.`;
 
 export const metadata: Metadata = {
   title: {
-    absolute: `${site.name} — Sitios web para negocios de la ${site.regionShort}`,
+    absolute: `${site.name} — Sitios web simples para negocios pequeños`,
   },
   description: DESCRIPTION,
   alternates: { canonical: "/" },
@@ -39,15 +39,15 @@ export default function HomePage() {
         />
         <Container className="relative pt-16 pb-14 sm:pt-24 sm:pb-20">
           <p className="mb-5 text-eyebrow text-accent-dark uppercase">
-            Diseño &amp; desarrollo web · {site.region}
+            Diseño &amp; desarrollo web
           </p>
           <h1 className="max-w-[780px] font-display text-display text-ink">
-            Sitios web con carácter para negocios que ya están creciendo
+            Sitios web simples, hechos por una sola persona
           </h1>
           <p className="mt-6 max-w-[560px] text-lead text-ink-muted">
-            Trabajo directo contigo para entender tu negocio antes de diseñar
-            nada — nada de plantillas genéricas ni agencias que te tratan como un
-            ticket.
+            Converso contigo antes de diseñar nada, porque cada negocio
+            funciona distinto. Después diseño y programo yo mismo, sin
+            pasarte a un equipo que no conoces.
           </p>
           <div className="mt-9 flex flex-wrap gap-4">
             <a
@@ -73,8 +73,8 @@ export default function HomePage() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
             eyebrow="Servicios"
-            title="¿En qué te puedo ayudar?"
-            subtitle="Cada servicio resuelve un problema concreto, no una lista de funciones."
+            title="En qué puedo ayudarte"
+            subtitle="Cada uno responde a un problema puntual que me han contado en conversaciones reales."
           />
           <Link
             href="/servicios"
@@ -100,7 +100,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Cómo trabajo"
           title="De la conversación al sitio publicado"
-          subtitle="Cuatro pasos, sin sorpresas y sin que tengas que perseguirme para saber cómo va."
+          subtitle="Cuatro pasos. Sabes en qué van sin tener que preguntarme."
         />
         <div className="mt-10">
           <ProcessSteps />
@@ -112,8 +112,8 @@ export default function HomePage() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeading
               eyebrow="Casos reales"
-              title="Clientes reales, no maquetas"
-              subtitle="Así trabajo cuando el proyecto pasa de la idea a producción."
+              title="Negocios que ya están usando su sitio"
+              subtitle="Esto es lo que quedó cuando el proyecto pasó de la idea a producción."
             />
             <Link
               href="/casos"
