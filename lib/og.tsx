@@ -5,15 +5,25 @@ import { site } from "@/content/site";
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = "image/png";
 
+/*
+ * Los colores van en hex y no en tokens de Tailwind a propósito: esto se
+ * renderiza fuera del navegador, sin la hoja de estilos del sitio. Son los
+ * mismos valores que los tokens de app/globals.css — si cambias la paleta allá,
+ * estos hay que moverlos a mano.
+ */
+const PETROL_DEEPER = "#00141a";
+const PETROL = "#004d59";
+const ON_DARK = "#eff5f6";
+const ON_DARK_SUBTLE = "#8c9a9c";
+const BRASS = "#b58a41";
+
 /**
  * Genera la imagen de compartir de una página.
  *
- * Antes las cuatro páginas compartían /og/default.png, así que un enlace a
- * /servicios y uno al home se veían idénticos en WhatsApp. Generarlas en vez de
- * dibujarlas a mano evita que quede una desactualizada cuando cambie el copy.
- *
- * Los colores están en hex y no en tokens de Tailwind a propósito: esto se
- * renderiza fuera del navegador, sin la hoja de estilos del sitio.
+ * Va en oscuro, al revés que el sitio. No es inconsistencia: estas imágenes
+ * compiten dentro de una conversación de WhatsApp, que es por donde llega la
+ * mayoría de la gente, y ahí casi todas las tarjetas de enlace son claras. Una
+ * oscura con una regla de latón se distingue del resto del hilo.
  */
 export function renderOgImage({
   eyebrow,
@@ -31,44 +41,34 @@ export function renderOgImage({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#fdf6ed",
-          padding: "72px 80px",
+          backgroundColor: PETROL_DEEPER,
+          backgroundImage: `radial-gradient(120% 110% at 88% 0%, ${PETROL} 0%, transparent 60%)`,
+          padding: "76px 84px",
           fontFamily: "sans-serif",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            top: -200,
-            right: -160,
-            width: 560,
-            height: 560,
-            borderRadius: 9999,
-            backgroundColor: "#d2efee",
-            opacity: 0.65,
-          }}
-        />
-
         <div style={{ display: "flex", flexDirection: "column" }}>
+          {/* La regla de latón: la misma marca que en el sitio señala dónde
+              empieza algo. */}
+          <div style={{ width: 84, height: 3, backgroundColor: BRASS }} />
           <div
             style={{
+              marginTop: 30,
               fontSize: 26,
-              fontWeight: 700,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "#ab4400",
+              color: ON_DARK_SUBTLE,
             }}
           >
             {eyebrow}
           </div>
           <div
             style={{
-              marginTop: 28,
-              fontSize: 68,
-              lineHeight: 1.1,
+              marginTop: 26,
+              fontSize: 72,
+              lineHeight: 1.06,
+              letterSpacing: "-0.03em",
               fontWeight: 600,
-              color: "#25170c",
-              maxWidth: 900,
+              color: ON_DARK,
+              maxWidth: 940,
             }}
           >
             {title}
@@ -78,20 +78,22 @@ export function renderOgImage({
         <div
           style={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "baseline",
             justifyContent: "space-between",
-            fontSize: 28,
-            color: "#655447",
+            fontSize: 26,
+            color: ON_DARK_SUBTLE,
           }}
         >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <span style={{ fontSize: 40, fontWeight: 600, color: "#004141" }}>
-              {site.name}
-            </span>
-            <span style={{ fontSize: 40, fontWeight: 600, color: "#d16631" }}>
-              .
-            </span>
-          </div>
+          <span
+            style={{
+              fontSize: 38,
+              fontWeight: 600,
+              letterSpacing: "-0.03em",
+              color: ON_DARK,
+            }}
+          >
+            {site.name}
+          </span>
           <span>{site.tagline}</span>
         </div>
       </div>

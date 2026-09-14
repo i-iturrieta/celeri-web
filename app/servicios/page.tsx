@@ -4,8 +4,9 @@ import { site } from "@/content/site";
 import { faq } from "@/content/faq";
 import { buildFaqJsonLd } from "@/lib/jsonld";
 import Container from "@/components/Container";
+import PageHeader from "@/components/PageHeader";
 import SectionHeading from "@/components/SectionHeading";
-import ServiceCard from "@/components/ServiceCard";
+import ServiceList from "@/components/ServiceList";
 import CTASection from "@/components/CTASection";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
@@ -28,37 +29,26 @@ export default function ServicesPage() {
     <>
       <JsonLd data={buildFaqJsonLd(faq)} />
 
-      <Container className="pt-16 pb-8">
-        <SectionHeading
-          as="h1"
-          eyebrow="Servicios"
-          title="Qué necesitas resolver"
-          subtitle="Elegimos juntos el que le sirve a tu negocio, no el que suena mejor."
-        />
+      <PageHeader
+        title="Qué necesitas resolver"
+        lead="Elegimos juntos el que le sirve a tu negocio, no el que suena mejor. Cada uno parte del problema, no de la tecnología."
+      />
+
+      <Container as="section" className="pt-20 pb-24 sm:pt-24 sm:pb-28">
+        <ServiceList services={services} headingLevel="h2" />
       </Container>
 
-      <Container as="section" className="pb-16">
-        <div className="grid gap-6 sm:grid-cols-2">
-          {services.map((service) => (
-            <ServiceCard
-              key={service.slug}
-              service={service}
-              headingLevel="h2"
-            />
-          ))}
-        </div>
-      </Container>
-
-      <Container as="section" className="pb-16">
-        <SectionHeading
-          eyebrow="Preguntas frecuentes"
-          title="Lo que todos preguntan antes de empezar"
-          subtitle="Plazos, pagos y qué pasa después de publicar. Si falta algo, escríbeme y lo agrego."
-        />
-        <div className="mt-8">
-          <Faq />
-        </div>
-      </Container>
+      <section className="border-y rule bg-limestone">
+        <Container className="py-24 sm:py-28">
+          <SectionHeading
+            title="Lo que todos preguntan antes de empezar"
+            subtitle="Plazos, pagos y qué pasa después de publicar. Si falta algo, escríbeme y lo agrego."
+          />
+          <div className="mt-12">
+            <Faq />
+          </div>
+        </Container>
+      </section>
 
       {/* Un solo cierre. Antes había un bloque "¿No sabes cuál necesitas?"
           pegado a un CTASection: dos llamados idénticos seguidos se anulan y el

@@ -1,127 +1,233 @@
 @import "tailwindcss";
 
 /*
- * Sistema de diseño Celeri.
+ * Sistema de diseño Celeri — "petróleo y latón".
  *
- * Regla: ningún componente inventa un tamaño, un color de texto atenuado ni una
- * transición propia. Todo sale de los tokens de abajo. Si necesitas un valor que
- * no está, agrégalo aquí primero.
+ * Regla: ningún componente inventa un color, un tamaño ni una transición
+ * propia. Todo sale de los tokens de abajo. Si necesitas un valor que no está,
+ * agrégalo aquí primero.
+ *
+ * La dirección en una línea: el petróleo dejó de ser un acento y pasó a ser el
+ * color del sitio. El latón aparece poco y siempre significa algo. El papel es
+ * frío, no cream — el cream cálido con acento terracota es el fondo por defecto
+ * de medio internet y hacía que el sitio se leyera como plantilla.
  */
 
 @theme {
-  /* --- Color -------------------------------------------------------------
-   * accent-strong y accent-dark son versiones oscurecidas del acento. El acento
-   * base solo da 3.45:1 sobre cream — suficiente para texto grande o adornos,
-   * insuficiente para texto (AA pide 4.5:1). Para texto o iconografía con
-   * significado sobre fondo claro, usa accent-dark (5.45:1).
+  /* --- Tinta -------------------------------------------------------------
+   * No es negro: es petróleo tan oscuro que pasa por negro. Sobre papel da
+   * 16.2:1. Los dos atenuados reemplazan a las opacidades sueltas (ink/68,
+   * /70, /72) que antes cada componente elegía a ojo.
+   *   ink-muted   6.72:1 sobre papel · 5.98:1 sobre caliza
+   *   ink-subtle  5.20:1 sobre papel · 4.62:1 sobre caliza
    */
-  --color-brand: oklch(0.34 0.06 195);
-  --color-brand-dark: oklch(0.22 0.045 195);
-  --color-brand-darker: oklch(0.18 0.04 195);
-  --color-brand-tint: oklch(0.93 0.03 195);
+  --color-ink: oklch(0.215 0.026 219);
+  --color-ink-muted: oklch(0.455 0.024 219);
+  --color-ink-subtle: oklch(0.515 0.022 219);
 
-  --color-accent: oklch(0.63 0.15 45);
-  --color-accent-dark: oklch(0.52 0.15 45);
-  --color-accent-strong: oklch(0.55 0.15 45);
+  /* --- Petróleo ----------------------------------------------------------
+   * El color de la marca. petrol sobre papel da 8.88:1, así que sirve para
+   * texto real y no solo para adornos. Las dos versiones profundas son las
+   * zonas oscuras por las que pasa el scroll. */
+  --color-petrol: oklch(0.385 0.068 212);
+  --color-petrol-deep: oklch(0.255 0.048 214);
+  --color-petrol-deeper: oklch(0.175 0.034 216);
+  --color-petrol-wash: oklch(0.905 0.021 210);
 
-  --color-cream: oklch(0.975 0.014 75);
-  --color-cream-light: oklch(0.995 0.008 75);
+  /* --- Papel -------------------------------------------------------------
+   * Tres superficies, no una. El sitio antes era un solo plano de cream y por
+   * eso se sentía estático: al hacer scroll no cambiaba nada. Ahora las
+   * secciones alternan papel / caliza / petróleo profundo. */
+  --color-paper: oklch(0.975 0.004 210);
+  --color-limestone: oklch(0.935 0.008 208);
 
-  --color-ink: oklch(0.22 0.03 60);
-  --color-ink-inverse: oklch(0.97 0.015 80);
+  /* --- Latón -------------------------------------------------------------
+   * El único color cálido, y aparece poco a propósito: marca lo que está
+   * activo o lo que es secuencia, nunca decora.
+   *
+   * CUIDADO: brass sobre papel da 2.93:1, así que hoy solo se usa como regla,
+   * borde y fondo de botón — nunca como texto sobre claro. Sobre oscuro sí
+   * llega (5.98:1 sobre petrol-deeper), y de ahí que el botón de la banda de
+   * cierre lleve texto petrol-deeper encima de latón.
+   *
+   * Si alguna vez necesitas latón como texto sobre papel, no bajes la opacidad
+   * de este: agrega una variante oscurecida (oklch(0.545 0.098 72) da 4.70:1) y
+   * anótala acá. Sobre caliza esa misma variante baja a 4.18:1 — ahí solo sirve
+   * para texto grande. */
+  --color-brass: oklch(0.66 0.105 78);
 
-  /* Texto atenuado. Antes esto vivía como ink/68, /70, /72 y /85 repartidos a
-   * mano por los componentes. Ambos superan AA sobre cream y cream-light:
-   * muted 6.67:1, subtle 5.16:1. No uses opacidades sueltas sobre ink. */
-  --color-ink-muted: oklch(0.46 0.03 60);
-  --color-ink-subtle: oklch(0.52 0.03 60);
-
-  /* Equivalentes sobre fondo oscuro (footer y bandas de CTA). */
-  --color-ink-inverse-muted: oklch(0.78 0.012 80);
-  --color-ink-inverse-subtle: oklch(0.66 0.01 80);
+  /* Texto sobre las zonas oscuras. */
+  --color-on-dark: oklch(0.965 0.006 210);
+  --color-on-dark-muted: oklch(0.795 0.014 210);
 
   /* --- Tipografía --------------------------------------------------------
-   * Una sola escala para las cuatro páginas. Antes el home usaba clamp() y las
-   * páginas internas text-4xl plano, así que parecían dos sitios distintos.
+   * Fraunces para el display: es variable y trae los ejes opsz, SOFT y WONK,
+   * que son los que le dan carácter en tamaño grande (la 'g' de caja única y
+   * las terminaciones inclinadas). Instrument Sans para todo lo demás.
+   *
+   * La escala se abrió bastante arriba: el display llega a 92px donde antes
+   * llegaba a 58. Un titular que ocupa espacio es la diferencia más barata
+   * entre un sitio que se ve caro y uno que no.
    */
-  --font-sans: var(--font-karla), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-lora), ui-serif, Georgia, serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
 
-  --text-display: clamp(36px, 5.5vw, 58px);
-  --text-display--line-height: 1.08;
-  --text-display--letter-spacing: -0.02em;
-  --text-display--font-weight: 600;
+  --text-display: clamp(42px, 7.2vw, 92px);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.032em;
+  --text-display--font-weight: 400;
 
-  --text-h1: clamp(32px, 4.6vw, 46px);
-  --text-h1--line-height: 1.12;
-  --text-h1--letter-spacing: -0.015em;
-  --text-h1--font-weight: 600;
+  --text-h1: clamp(34px, 5.2vw, 62px);
+  --text-h1--line-height: 1.04;
+  --text-h1--letter-spacing: -0.026em;
+  --text-h1--font-weight: 400;
 
-  --text-h2: clamp(26px, 3.4vw, 34px);
-  --text-h2--line-height: 1.2;
-  --text-h2--font-weight: 600;
+  --text-h2: clamp(26px, 3.3vw, 40px);
+  --text-h2--line-height: 1.12;
+  --text-h2--letter-spacing: -0.018em;
+  --text-h2--font-weight: 400;
 
-  --text-h3: 19px;
-  --text-h3--line-height: 1.35;
-  --text-h3--font-weight: 700;
+  --text-h3: 20px;
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.01em;
+  --text-h3--font-weight: 500;
 
-  --text-lead: 18px;
-  --text-lead--line-height: 1.65;
+  --text-lead: clamp(17px, 1.35vw, 21px);
+  --text-lead--line-height: 1.6;
 
-  --text-body: 16px;
-  --text-body--line-height: 1.7;
+  --text-body: 16.5px;
+  --text-body--line-height: 1.72;
 
   --text-small: 15px;
-  --text-small--line-height: 1.65;
+  --text-small--line-height: 1.6;
 
-  --text-eyebrow: 13px;
-  --text-eyebrow--line-height: 1.4;
-  --text-eyebrow--letter-spacing: 0.08em;
-  --text-eyebrow--font-weight: 700;
+  --text-micro: 13px;
+  --text-micro--line-height: 1.45;
 
   /* --- Movimiento --------------------------------------------------------
-   * Una duración y una curva para todo el sitio. */
-  --ease-brand: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --duration-brand: 180ms;
+   * Dos curvas: una para respuestas a un clic o un hover (rápida, seca) y otra
+   * para el movimiento ambiental del hero (larguísima, nunca acelera). */
+  --ease-brand: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --ease-drift: cubic-bezier(0.45, 0, 0.55, 1);
+  --duration-brand: 220ms;
 }
 
-/* Transición estándar. Sustituye a los `transition-transform` sueltos que
- * estaban repartidos por tres componentes con duraciones distintas. */
+/* Fraunces tiene ejes propios; sin esto se renderiza en su posición neutra y
+ * pierde justo lo que la hace distinta de cualquier otra serif. opsz alto
+ * afina las astas para tamaños grandes; WONK activa las formas inclinadas. */
+@utility font-display {
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 12, "WONK" 1, "opsz" 96;
+}
+
+/* La misma serif en tamaño de párrafo necesita lo contrario: opsz bajo y sin
+ * WONK, o las astas finas desaparecen. */
+@utility font-display-text {
+  font-family: var(--font-serif);
+  font-variation-settings: "SOFT" 20, "WONK" 0, "opsz" 20;
+}
+
+/* Transición estándar del sitio. */
 @utility transition-brand {
   transition-property: color, background-color, border-color, opacity,
-    box-shadow, transform;
+    box-shadow, transform, letter-spacing;
   transition-duration: var(--duration-brand);
   transition-timing-function: var(--ease-brand);
 }
 
-/* Anillo de foco único para todo lo enfocable: links, botones y controles.
- * Antes solo WhatsAppFloat tenía focus-visible. */
+/* Anillo de foco único para todo lo enfocable: links, botones y controles. */
 @utility focus-ring {
   &:focus-visible {
-    outline: 2px solid var(--color-brand);
+    outline: 2px solid var(--color-petrol);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 3px;
   }
 }
 
-/* Igual, pero sobre fondos oscuros, donde el brand no se ve. */
+/* Igual, sobre las zonas oscuras, donde el petróleo no se ve. */
 @utility focus-ring-inverse {
   &:focus-visible {
-    outline: 2px solid var(--color-cream);
+    outline: 2px solid var(--color-brass);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 3px;
   }
 }
 
+/* --- Movimiento ambiental del hero ---------------------------------------
+ * Dos manchas de luz con períodos distintos (38s y 53s) que no son múltiplos
+ * entre sí, así que la combinación tarda mucho en repetirse y el fondo nunca
+ * se lee como un loop. Es el único movimiento no disparado por el usuario en
+ * todo el sitio.
+ */
+@keyframes drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-6%, 4%, 0) scale(1.14); }
+}
+
+@keyframes drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.08); }
+  50% { transform: translate3d(7%, -5%, 0) scale(0.94); }
+}
+
+@utility drift-a {
+  animation: drift-a 38s var(--ease-drift) infinite;
+}
+
+@utility drift-b {
+  animation: drift-b 53s var(--ease-drift) infinite;
+}
+
+/* Entrada del hero: un solo momento orquestado al cargar la página, no un
+ * fade-and-slide por cada sección al hacer scroll (eso es justo lo que delata
+ * una plantilla). El escalonado va por --rise-delay desde el componente. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@utility rise {
+  opacity: 0;
+  animation: rise 760ms var(--ease-brand) forwards;
+  animation-delay: var(--rise-delay, 0ms);
+}
+
+/* Regla fina del sitio. Una sola definición para que todas las divisiones
+ * tengan el mismo peso; antes cada componente escribía su propio border-ink/10. */
+@utility rule {
+  border-color: color-mix(in oklab, var(--color-ink) 14%, transparent);
+}
+
+
 ::selection {
-  background: oklch(0.63 0.15 45 / 0.25);
+  background: var(--color-petrol-wash);
+  color: var(--color-ink);
 }
 
 html {
   scroll-behavior: smooth;
+  /* Deja que el navegador aplique opsz solo donde no lo fijamos a mano. */
+  font-optical-sizing: auto;
 }
 
-/* Quien pidió menos movimiento no recibe los hover:scale ni el scroll suave. */
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* El scroll suave y el ancla del header sticky se pelean: sin esto, saltar a
+ * una sección la deja escondida detrás de la barra. */
+:target {
+  scroll-margin-top: 6rem;
+}
+
+/* Quien pidió menos movimiento no recibe ni la deriva del hero, ni la entrada
+ * escalonada, ni el scroll suave. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -136,8 +242,18 @@ html {
     scroll-behavior: auto !important;
   }
 
-  .hover\:scale-105:hover,
-  .hover\:-translate-y-0\.5:hover {
-    transform: none !important;
+  /* `rise` parte en opacity:0 y llega a 1 por animación. Con la animación
+     recortada a 0.01ms igual termina, pero lo dejamos explícito para que el
+     contenido nunca dependa de que una animación corra. */
+  .rise {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  /* La deriva del hero es infinita y puramente decorativa: se apaga de verdad,
+     en vez de quedar corriendo una iteración de 0.01ms. */
+  .drift-a,
+  .drift-b {
+    animation: none !important;
   }
 }

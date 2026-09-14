@@ -16,9 +16,34 @@ const NAV_LINKS = [
   { href: "/contacto", label: "Contacto" },
 ];
 
+function Wordmark({ onClick }: { onClick?: () => void }) {
+  return (
+    <Link
+      href="/"
+      onClick={onClick}
+      className="focus-ring transition-brand font-display text-[27px] leading-none tracking-[-0.035em] text-ink hover:text-petrol"
+    >
+      {site.name}
+    </Link>
+  );
+}
+
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // La barra no tiene borde mientras la página está arriba del todo: así el
+  // header se apoya sobre el campo de luz del hero en vez de cortarlo con una
+  // línea. El borde aparece recién cuando hay contenido pasando por debajo.
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 8);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Con el menú móvil abierto, Escape lo cierra y el fondo no hace scroll: sin
   // esto quedabas atrapado desplazando la página por detrás del panel.
@@ -40,18 +65,15 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-ink/10 bg-cream/95 backdrop-blur-sm">
-      <Container className="flex items-center justify-between gap-6 py-5">
-        <Link
-          href="/"
-          onClick={() => setOpen(false)}
-          className="focus-ring transition-brand font-display text-2xl font-semibold text-ink italic hover:text-brand"
-        >
-          {site.name}
-          <span className="text-accent">.</span>
-        </Link>
+    <header
+      className={`transition-brand sticky top-0 z-40 border-b bg-paper/85 backdrop-blur-md ${
+        scrolled || open ? "rule" : "border-transparent"
+      }`}
+    >
+      <Container className="flex items-center justify-between gap-8 py-5">
+        <Wordmark onClick={() => setOpen(false)} />
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-9 md:flex">
           {NAV_LINKS.map((link) => {
             const active =
               link.href === "/"
@@ -62,13 +84,20 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`focus-ring transition-brand border-b-2 pb-1 text-sm font-semibold hover:text-ink ${
-                  active
-                    ? "border-accent text-ink"
-                    : "border-transparent font-medium text-ink-muted hover:border-ink/20"
+                /* El latón marca "estás aquí" y nada más. Es el mismo código
+                   que el segmento sobre la línea del proceso: latón = posición
+                   en algo. */
+                className={`focus-ring transition-brand relative py-1 text-small hover:text-ink ${
+                  active ? "text-ink" : "text-ink-subtle"
                 }`}
               >
                 {link.label}
+                {active && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute -bottom-0.5 left-0 h-px w-full bg-brass"
+                  />
+                )}
               </Link>
             );
           })}
@@ -76,7 +105,7 @@ export default function Header() {
             href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="focus-ring transition-brand inline-flex items-center gap-2 rounded-lg bg-brand px-5 py-2.5 text-sm font-semibold whitespace-nowrap text-ink-inverse hover:bg-brand-dark"
+            className="focus-ring transition-brand inline-flex items-center bg-petrol px-5 py-2.5 text-small font-medium whitespace-nowrap text-on-dark hover:bg-petrol-deep"
           >
             WhatsApp
           </a>
@@ -84,7 +113,7 @@ export default function Header() {
 
         <button
           type="button"
-          className="focus-ring transition-brand rounded-md p-1 text-ink hover:text-brand md:hidden"
+          className="focus-ring transition-brand -mr-1 p-1 text-ink hover:text-petrol md:hidden"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
           aria-controls="menu-movil"
@@ -101,34 +130,38 @@ export default function Header() {
       <div
         id="menu-movil"
         hidden={!open}
-        className="flex flex-col gap-[18px] border-t border-ink/10 bg-cream px-6 pt-5 pb-7 md:hidden"
+        className="border-t rule bg-paper md:hidden"
       >
-        {NAV_LINKS.map((link) => {
-          const active =
-            link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
-          return (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              aria-current={active ? "page" : undefined}
-              className={`focus-ring transition-brand text-base hover:text-brand ${
-                active ? "font-bold text-ink" : "font-medium text-ink-muted"
-              }`}
-            >
-              {link.label}
-            </Link>
-          );
-        })}
-        <a
-          href={waLink()}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => setOpen(false)}
-          className="focus-ring transition-brand mt-1 inline-flex items-center justify-center gap-2 rounded-lg bg-brand px-5 py-3.5 text-small font-semibold text-ink-inverse hover:bg-brand-dark"
-        >
-          WhatsApp
-        </a>
+        <Container className="flex flex-col py-2">
+          {NAV_LINKS.map((link) => {
+            const active =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                aria-current={active ? "page" : undefined}
+                className={`focus-ring transition-brand border-b rule py-4 font-display text-[22px] last:border-b-0 ${
+                  active ? "text-petrol" : "text-ink hover:text-petrol"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+          <a
+            href={waLink()}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="focus-ring transition-brand my-5 inline-flex items-center justify-center bg-petrol px-5 py-4 text-small font-medium text-on-dark hover:bg-petrol-deep"
+          >
+            Hablemos por WhatsApp
+          </a>
+        </Container>
       </div>
     </header>
   );

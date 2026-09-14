@@ -9,19 +9,21 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <Container width="narrow" className="py-24 text-center">
-      <p className="text-eyebrow text-accent-dark uppercase">Error 404</p>
-      <h1 className="mt-4 font-display text-h1 text-ink">
+    <Container width="narrow" className="py-28 sm:py-36">
+      <p className="font-display-text text-small tabular-nums text-ink-subtle">
+        404
+      </p>
+      <h1 className="font-display mt-5 max-w-[14ch] text-h1 text-balance text-ink">
         Esta página no existe
       </h1>
-      <p className="mx-auto mt-5 max-w-[480px] text-lead text-ink-muted">
+      <p className="mt-7 max-w-[52ch] text-lead text-ink-muted">
         Puede que el enlace esté mal escrito o que la página haya cambiado de
         lugar. Desde el inicio llegas a todo lo demás.
       </p>
-      <div className="mt-9 flex flex-wrap justify-center gap-4">
+      <div className="mt-10 flex flex-wrap items-center gap-x-9 gap-y-5">
         <Link
           href="/"
-          className="focus-ring transition-brand inline-flex items-center rounded-lg bg-brand px-7 py-4 text-base font-semibold text-ink-inverse hover:bg-brand-dark"
+          className="focus-ring transition-brand inline-flex items-center bg-petrol px-7 py-4 text-small font-medium text-on-dark hover:bg-petrol-deep"
         >
           Volver al inicio
         </Link>
@@ -29,7 +31,7 @@ export default function NotFound() {
           href={waLink(`Hola, buscaba algo en ${site.domain} y no lo encontré`)}
           target="_blank"
           rel="noopener noreferrer"
-          className="focus-ring transition-brand inline-flex items-center rounded-lg border-[1.5px] border-ink/20 px-7 py-4 text-base font-semibold text-ink hover:border-brand hover:text-brand"
+          className="focus-ring transition-brand text-small font-medium text-ink underline decoration-ink/30 decoration-1 underline-offset-[6px] hover:text-petrol hover:decoration-2 hover:decoration-petrol"
         >
           Pregúntame por WhatsApp
         </a>

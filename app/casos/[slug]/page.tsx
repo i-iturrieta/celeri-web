@@ -55,6 +55,10 @@ export default async function CaseDetailPage({
   const caseStudy = getCase(slug);
   if (!caseStudy) notFound();
 
+  const displayUrl = caseStudy.url
+    .replace(/^https?:\/\/(www\.)?/, "")
+    .replace(/\/$/, "");
+
   return (
     <>
       <JsonLd data={buildCaseJsonLd(caseStudy)} />
@@ -66,72 +70,86 @@ export default async function CaseDetailPage({
         ])}
       />
 
-      <Container className="pt-10 pb-8">
-        <nav aria-label="Migas de pan" className="mb-8 text-small text-ink-muted">
-          <Link href="/casos" className="focus-ring transition-brand hover:text-brand">
-            ← Todos los casos
-          </Link>
-        </nav>
+      <section className="border-b rule bg-limestone">
+        <Container className="pt-10 pb-16 sm:pb-20">
+          <nav aria-label="Migas de pan" className="mb-12">
+            <Link
+              href="/casos"
+              className="focus-ring transition-brand text-small text-ink-subtle hover:text-petrol"
+            >
+              Todos los casos
+            </Link>
+          </nav>
 
-        {caseStudy.kind === "demo" && (
-          <p className="mb-4 inline-block rounded-full bg-ink/10 px-3 py-1.5 text-xs font-bold tracking-[0.04em] text-ink-muted uppercase">
-            Ejemplo — no es un cliente
+          {caseStudy.kind === "demo" && (
+            <p className="mb-6 inline-block border rule px-2.5 py-1 text-micro text-ink-subtle">
+              Ejemplo, no es un cliente
+            </p>
+          )}
+
+          <h1 className="font-display max-w-[16ch] text-h1 text-balance text-ink">
+            {caseStudy.client}
+          </h1>
+          <p className="mt-7 max-w-[58ch] text-lead text-ink-muted">
+            {caseStudy.summary}
           </p>
-        )}
 
-        <h1 className="max-w-[820px] font-display text-h1 text-ink">
-          {caseStudy.client}
-        </h1>
-        <p className="mt-5 max-w-[720px] text-lead text-ink-muted">
-          {caseStudy.summary}
-        </p>
+          <a
+            href={caseStudy.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="focus-ring transition-brand mt-8 inline-flex items-center gap-1.5 text-small text-ink underline decoration-ink/30 decoration-1 underline-offset-[6px] hover:text-petrol hover:decoration-2 hover:decoration-petrol"
+          >
+            {displayUrl}
+            <ArrowUpRight size={16} aria-hidden="true" />
+          </a>
+        </Container>
+      </section>
 
-        <a
-          href={caseStudy.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="focus-ring transition-brand mt-6 inline-flex items-center gap-1.5 text-small font-semibold text-brand hover:text-accent-dark"
-        >
-          Visitar {caseStudy.url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
-          <ArrowUpRight size={17} aria-hidden="true" />
-        </a>
-      </Container>
+      {/* La captura entra a sangre completa y sin marco: es lo que el visitante
+          vino a ver, y encajonarla en una tarjeta con borde la encoge. */}
+      <div className="relative aspect-[16/9] w-full sm:aspect-[21/9]">
+        <Image
+          src={caseStudy.image}
+          alt={`Captura del sitio de ${caseStudy.client}`}
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover"
+        />
+      </div>
 
-      <Container as="section" className="pb-12">
-        <div className="relative aspect-[16/9] overflow-hidden rounded-[18px] border border-ink/10">
-          <Image
-            src={caseStudy.image}
-            alt={`Captura del sitio de ${caseStudy.client}`}
-            fill
-            sizes="(max-width: 1120px) 100vw, 1120px"
-            priority
-            className="object-cover"
-          />
-        </div>
-      </Container>
+      <Container as="section" className="pt-20 pb-24 sm:pt-24 sm:pb-28">
+        <div className="grid gap-x-16 gap-y-14 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)]">
+          <div>
+            {SECTIONS.map(({ key, label }) => (
+              <article
+                key={key}
+                className="border-t rule pt-9 pb-11 first:border-t-0 first:pt-0 last:pb-0"
+              >
+                <h2 className="font-display text-h2 text-ink">{label}</h2>
+                <p className="mt-6 max-w-[64ch] text-body text-ink-muted">
+                  {caseStudy[key]}
+                </p>
+              </article>
+            ))}
+          </div>
 
-      <Container as="section" className="pb-16">
-        <div className="max-w-[720px]">
-          {SECTIONS.map(({ key, label }) => (
-            <div key={key} className="mt-10 first:mt-0">
-              <h2 className="font-display text-h2 text-ink">{label}</h2>
-              <p className="mt-3 text-body text-ink-muted">{caseStudy[key]}</p>
-            </div>
-          ))}
-
-          <div className="mt-12">
-            <h2 className="font-display text-h2 text-ink">Qué incluyó</h2>
-            <ul className="mt-4 flex flex-wrap gap-2">
+          {/* La ficha va al costado, no al final: es material de referencia,
+              no el siguiente capítulo de la historia. */}
+          <aside className="lg:pt-1">
+            <h2 className="text-small text-ink-subtle">Qué incluyó</h2>
+            <ul className="mt-6 border-b rule">
               {caseStudy.tags.map((tag) => (
                 <li
                   key={tag}
-                  className="rounded-full bg-brand-tint px-3 py-1.5 text-xs font-bold tracking-[0.04em] text-brand"
+                  className="border-t rule py-4 text-small text-ink"
                 >
                   {tag}
                 </li>
               ))}
             </ul>
-          </div>
+          </aside>
         </div>
       </Container>
 

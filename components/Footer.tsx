@@ -4,7 +4,6 @@ import { waLink } from "@/lib/whatsapp";
 import Container from "@/components/Container";
 
 const NAV_LINKS = [
-  { href: "/", label: "Inicio" },
   { href: "/servicios", label: "Servicios" },
   { href: "/casos", label: "Casos" },
   { href: "/sobre-mi", label: "Sobre mí" },
@@ -18,44 +17,48 @@ function formatPhone(whatsapp: string): string {
 }
 
 const LINK_CLASS =
-  "focus-ring-inverse transition-brand text-small text-ink-inverse-muted hover:text-ink-inverse";
+  "focus-ring transition-brand text-small text-ink-muted hover:text-petrol";
 
+/**
+ * El pie va en caliza, no en oscuro.
+ *
+ * Antes el cierre de cada página era una banda oscura e inmediatamente debajo
+ * venía un pie más oscuro todavía: los dos se fundían en un solo bloque negro
+ * de media pantalla y la banda de cierre, que es el llamado a la acción,
+ * dejaba de destacar sobre nada. En claro, la banda vuelve a ser el remate y el
+ * pie vuelve a ser lo que es — información de referencia.
+ */
 export default function Footer() {
   return (
-    <footer className="bg-brand-darker text-ink-inverse">
-      <Container className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-[2fr_1fr_1fr]">
+    <footer className="bg-limestone text-ink">
+      <Container className="grid grid-cols-1 gap-x-12 gap-y-12 py-20 sm:grid-cols-[1.6fr_1fr_1fr]">
         <div>
           <Link
             href="/"
-            className="focus-ring-inverse transition-brand font-display text-2xl font-semibold italic hover:text-brand-tint"
+            className="focus-ring transition-brand font-display text-[27px] leading-none tracking-[-0.035em] text-ink hover:text-petrol"
           >
             {site.name}
-            <span className="text-accent">.</span>
           </Link>
-          <p className="mt-4 max-w-xs text-small text-ink-inverse-muted">
-            Sitios web para negocios que ya tienen clientes y necesitan un
-            lugar propio donde mostrarse.
+          <p className="mt-5 max-w-[34ch] text-small text-ink-muted">
+            Sitios web para negocios que ya tienen clientes y necesitan un lugar
+            propio donde mostrarse.
           </p>
         </div>
 
-        <div>
-          <p className="mb-4 text-eyebrow text-ink-inverse-subtle uppercase">
-            Navegación
-          </p>
-          <div className="flex flex-col items-start gap-2.5">
+        <nav aria-label="Pie de página">
+          <p className="text-micro text-ink-subtle">Navegación</p>
+          <div className="mt-5 flex flex-col items-start gap-3">
             {NAV_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className={LINK_CLASS}>
                 {link.label}
               </Link>
             ))}
           </div>
-        </div>
+        </nav>
 
         <div>
-          <p className="mb-4 text-eyebrow text-ink-inverse-subtle uppercase">
-            Contacto
-          </p>
-          <div className="flex flex-col items-start gap-2.5">
+          <p className="text-micro text-ink-subtle">Contacto</p>
+          <div className="mt-5 flex flex-col items-start gap-3">
             <a
               href={waLink()}
               target="_blank"
@@ -71,9 +74,14 @@ export default function Footer() {
         </div>
       </Container>
 
-      <Container className="border-t border-ink-inverse/15 py-8">
-        <p className="text-[13px] text-ink-inverse-subtle">
-          © {new Date().getFullYear()} {site.name}.
+      {/* Un estudio de una persona firma su trabajo. La marca sola deja al
+          visitante sin saber con quién va a hablar. */}
+      <Container className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-t rule py-8">
+        <p className="text-micro text-ink-subtle">
+          © {new Date().getFullYear()} {site.name}
+        </p>
+        <p className="text-micro text-ink-muted">
+          Diseñado y programado por {site.owner}
         </p>
       </Container>
     </footer>

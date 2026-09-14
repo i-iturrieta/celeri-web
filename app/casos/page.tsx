@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { clientCases, demoCases } from "@/content/cases";
 import { site } from "@/content/site";
 import Container from "@/components/Container";
+import PageHeader from "@/components/PageHeader";
 import SectionHeading from "@/components/SectionHeading";
 import CaseCard from "@/components/CaseCard";
 import CTASection from "@/components/CTASection";
@@ -22,22 +23,19 @@ export const metadata: Metadata = {
 export default function CasesPage() {
   return (
     <>
-      <Container className="pt-16 pb-8">
-        <SectionHeading
-          as="h1"
-          eyebrow="Casos"
-          title="Sitios que están en línea ahora mismo"
-          subtitle="Cada caso empieza con el problema que tenía el negocio antes de escribirme."
-        />
-      </Container>
+      <PageHeader
+        title="Sitios que están en línea ahora mismo"
+        lead="Cada caso empieza con el problema que tenía el negocio antes de escribirme, no con la lista de tecnologías que usé."
+      />
 
-      <Container as="section" className="pb-16">
-        <div className="flex flex-col gap-8">
+      <Container as="section" className="pt-20 pb-24 sm:pt-24 sm:pb-28">
+        <div className="flex flex-col gap-24 sm:gap-28">
           {clientCases.map((c, i) => (
             <CaseCard
               key={c.slug}
               caseStudy={c}
               priority={i === 0}
+              reverse={i % 2 === 1}
               headingLevel="h2"
             />
           ))}
@@ -45,18 +43,19 @@ export default function CasesPage() {
       </Container>
 
       {demoCases.length > 0 && (
-        <Container as="section" className="pb-16">
-          <SectionHeading
-            eyebrow="Ejemplos"
-            title="Ejemplos que construí por mi cuenta"
-            subtitle="No son clientes: son vitrinas que hice para mostrar cómo se vería un sitio en distintos rubros. Los separo a propósito para que sepas qué estás mirando."
-          />
-          <div className="mt-9 flex flex-col gap-8">
-            {demoCases.map((c) => (
-              <CaseCard key={c.slug} caseStudy={c} />
-            ))}
-          </div>
-        </Container>
+        <section className="border-t rule bg-limestone">
+          <Container className="py-24 sm:py-28">
+            <SectionHeading
+              title="Ejemplos que construí por mi cuenta"
+              subtitle="No son clientes: son vitrinas que hice para mostrar cómo se vería un sitio en distintos rubros. Los separo a propósito para que sepas qué estás mirando."
+            />
+            <div className="mt-16 flex flex-col gap-24 sm:gap-28">
+              {demoCases.map((c, i) => (
+                <CaseCard key={c.slug} caseStudy={c} reverse={i % 2 === 1} />
+              ))}
+            </div>
+          </Container>
+        </section>
       )}
 
       <CTASection

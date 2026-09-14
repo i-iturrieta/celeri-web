@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lora, Karla } from "next/font/google";
+import { Fraunces, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,15 +8,23 @@ import JsonLd from "@/components/JsonLd";
 import { site } from "@/content/site";
 import { buildJsonLd } from "@/lib/jsonld";
 
-const lora = Lora({
-  variable: "--font-lora",
+/**
+ * Fraunces variable, con sus tres ejes propios cargados.
+ *
+ * Se piden explícitamente porque el carácter de esta serif vive en los ejes, no
+ * en el peso: sin SOFT/WONK/opsz se renderiza en la posición neutra y queda
+ * indistinguible de cualquier otra serif de Google. Quién los usa y con qué
+ * valores está en las utilidades `font-display` y `font-display-text`.
+ */
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  axes: ["SOFT", "WONK", "opsz"],
   display: "swap",
 });
 
-const karla = Karla({
-  variable: "--font-karla",
+const instrument = Instrument_Sans({
+  variable: "--font-instrument",
   subsets: ["latin"],
   display: "swap",
 });
@@ -46,9 +54,9 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${lora.variable} ${karla.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${instrument.variable} h-full`}
     >
-      <body className="flex min-h-full flex-col bg-cream font-sans text-ink">
+      <body className="flex min-h-full flex-col bg-paper font-sans text-ink">
         <JsonLd data={buildJsonLd()} />
 
         {/* Primer elemento enfocable de la página: quien navega con teclado
@@ -56,7 +64,7 @@ export default function RootLayout({
             página. Invisible hasta que recibe foco. */}
         <a
           href="#contenido"
-          className="focus-ring sr-only z-50 focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:rounded-lg focus:bg-brand focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-ink-inverse"
+          className="focus-ring sr-only z-50 focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:bg-petrol focus:px-5 focus:py-3 focus:text-small focus:font-medium focus:text-on-dark"
         >
           Saltar al contenido
         </a>
