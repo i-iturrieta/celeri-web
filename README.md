@@ -15,7 +15,19 @@ npm run build      # build de producción
 npm run lint
 npm run typecheck
 npm run smoke      # requiere un build previo
+npm run shots      # regenera las capturas de los casos
 ```
+
+`npm run shots` levanta Chromium y vuelve a capturar los sitios de los clientes
+(`public/cases/*.webp`), todos con la misma receta: viewport 1440×810 a 2x, sin
+scroll, salida WebP de 1920×1080. La lista sale de `content/cases.ts`, así que
+un caso nuevo entra solo. Corrélo cuando un cliente cambie su sitio —
+`npm run shots -- waiki` hace solo uno.
+
+Al terminar imprime la dispersión de peso entre capturas. Que una pese mucho
+más no es un problema por sí solo (un hero fotográfico comprime peor que uno
+plano), pero sí es la señal de mirarla: el mismo síntoma lo da un sitio
+capturado a medio cargar.
 
 No hay variables de entorno: el sitio es completamente estático y todo el
 contacto ocurre por WhatsApp y correo, sin backend.

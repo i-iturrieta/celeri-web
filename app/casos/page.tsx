@@ -28,7 +28,7 @@ export default function CasesPage() {
         lead="Cada caso empieza con el problema que tenía el negocio antes de escribirme, no con la lista de tecnologías que usé."
       />
 
-      <Container as="section" className="pt-20 pb-24 sm:pt-24 sm:pb-28">
+      <Container as="section" className="section-open">
         <div className="flex flex-col gap-24 sm:gap-28">
           {clientCases.map((c, i) => (
             <CaseCard
@@ -44,7 +44,7 @@ export default function CasesPage() {
 
       {demoCases.length > 0 && (
         <section className="border-t rule bg-surface-sunken">
-          <Container className="py-24 sm:py-28">
+          <Container className="section-base">
             <SectionHeading
               title="Ejemplos que construí por mi cuenta"
               subtitle="No son clientes: son vitrinas que hice para mostrar cómo se vería un sitio en distintos rubros. Los separo a propósito para que sepas qué estás mirando."

@@ -131,6 +131,11 @@
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
 
+  /* `tighter` existe solo para el titular del hero. A 4rem (el techo del
+   * clamp de --text-5xl) el -0.02em que sirve para el resto de los titulares
+   * deja los caracteres sueltos: el tracking óptico tiene que cerrarse a
+   * medida que el tamaño sube. No lo uses en h2 ni más abajo. */
+  --tracking-tighter: -0.03em;
   --tracking-tight: -0.02em;
   --tracking-normal: 0;
   --tracking-wide: 0.04em;
@@ -164,9 +169,42 @@
    * Una sola curva, ease-out, sin rebote. El movimiento es un detalle de
    * terminación, nunca el centro de atención. */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* La curva de arranque, y la única otra del sistema. Existe para una sola
+   * cosa: el recorrido del contorno de la tarjeta de caso, que sale medido y
+   * acelera hasta cerrar el circuito.
+   *
+   * Está elegida contra números, no a ojo. Sobre un segundo de recorrido:
+   *
+   *     curva                    150ms  500ms  850ms
+   *     cubic-bezier(.55,0,.85,.5)   2%    18%    65%   ← muerta al arrancar
+   *     ease-in (.42,0,1,1)          4%    32%    79%
+   *     ESTA (.25,.1,.9,.6)          9%    35%    71%
+   *     linear                      15%    52%    85%   ← sin aceleración
+   *
+   * El primer tramo es lo que hace que el hover se sienta respondido: con las
+   * curvas de arranque más duro la línea no se mueve en el primer octavo de
+   * segundo y parece que no pasó nada. Esta sale a la vista y aun así termina
+   * unas tres veces más rápido de lo que empezó.
+   *
+   * No la uses para estados. Los estados van con `--ease-out`, que responde de
+   * inmediato y frena; una curva que arranca lenta en un hover se siente
+   * pesada. Esta es para recorridos, y hay uno solo. */
+  --ease-in: cubic-bezier(0.25, 0.1, 0.9, 0.6);
   --duration-fast: 120ms;
   --duration-base: 200ms;
   --duration-slow: 360ms;
+
+  /* Lo que tarda el contorno de una tarjeta de caso en recorrer el perímetro
+   * completo. Lo usan las dos mitades del mismo gesto —el dibujado al pasar el
+   * cursor y la vuelta extra mientras se espera la navegación— porque es la
+   * misma línea moviéndose y tiene que ir al mismo ritmo.
+   *
+   * Es mucho más lento que el resto del sistema a propósito: `--duration-slow`
+   * con la curva `--ease-out` recorría el contorno en un salto, no en un
+   * viaje. Esto no es un cambio de estado, es un trayecto, y un trayecto se
+   * tiene que poder seguir con el ojo. Ver `case-outline` más abajo. */
+  --duration-lap: 1000ms;
 
   /* --- Escala semántica --------------------------------------------------
    * Nombres por rol sobre los tamaños de arriba. La escala cruda del design
@@ -249,6 +287,100 @@
   border-color: var(--color-border-inverse);
 }
 
+/* --- Ritmo de sección ----------------------------------------------------
+ * Antes cada sección escribía su propio `py-24 sm:py-28` y el sitio entero
+ * respiraba igual de principio a fin. Un espaciado parejo se lee como
+ * plantilla: lo que distingue a una pieza cuidada es que comprime y suelta
+ * según lo que la sección esté haciendo.
+ *
+ * Tres pasos y una apertura. Elegí por el ROL de la sección, no por cuánto
+ * espacio te parece que necesita:
+ *
+ *   tight  — continúa el tema anterior, no abre uno nuevo
+ *   base   — sección normal, o una que ya viene separada por su propio fondo
+ *   loose  — la vitrina de la página, el contenido que se quiere mirar
+ *   open   — la primera sección después de un PageHeader: entra pegada al
+ *            encabezado (que ya trajo su propio aire) y cierra en `base`
+ *
+ * Si necesitás un cuarto paso, agregalo acá con un nombre que diga su rol.
+ * No escribas el `py-` suelto en el componente. */
+@utility section-tight {
+  @apply py-16 sm:py-20;
+}
+
+@utility section-base {
+  @apply py-24 sm:py-28;
+}
+
+@utility section-loose {
+  @apply py-32 sm:py-40;
+}
+
+@utility section-open {
+  @apply pt-16 pb-24 sm:pt-20 sm:pb-28;
+}
+
+/* --- Contorno de la tarjeta de caso ---------------------------------------
+ * La única interacción con movimiento del sitio: al pasar el cursor sobre la
+ * captura de un caso, una línea ámbar se dibuja desde la esquina superior
+ * izquierda y recorre el contorno; al salir, se repliega por donde vino.
+ *
+ * Es una EXCEPCIÓN deliberada a "hover y press son cambio de color sólido", y
+ * está permitida porque no es un estado decorado: es una línea que aparece
+ * donde no había nada, o sea la misma clase de señal que el subrayado de un
+ * link. Lo que la regla prohíbe —el fade de opacidad y el scale— sigue
+ * prohibido, y esto no es ninguno de los dos. No la extiendas a los botones.
+ *
+ * Cómo funciona, porque no es obvio:
+ *   - `pathLength="100"` normaliza el perímetro a 100 unidades sin importar
+ *     cuánto mida la caja, así que un solo par de números sirve para cualquier
+ *     tamaño de tarjeta.
+ *   - `stroke-dashoffset` va de 100 (invisible) a 0 (contorno completo). El
+ *     repliegue al salir no se programa: es la misma transición al revés.
+ *   - El SVG no lleva viewBox y el <rect> se estira al 100%, así que una
+ *     unidad de usuario es un píxel y el grosor sale parejo solo. Ojo si
+ *     alguna vez le ponés un viewBox: con `preserveAspectRatio="none"` la
+ *     escala no uniforme rompe el cálculo de guiones y el contorno se dibuja
+ *     en un tramo suelto en vez de recorrer el perímetro.
+ *
+ * La vuelta extra (`is-pending`) solo corre mientras la navegación está de
+ * verdad pendiente — ver components/CaseOutline.tsx. Con las páginas de caso
+ * prerenderizadas y prefetcheadas casi nunca se ve, y así debe ser: es para la
+ * conexión mala, no para el efecto. */
+@utility case-outline {
+  fill: none;
+  stroke: var(--color-surface-accent);
+  stroke-width: 2;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  /* `--ease-in`, no `--ease-out` ni `linear`: la línea sale lenta desde la
+   * esquina y acelera hasta cerrar el circuito.
+   *
+   * `--ease-out` no servía —recorría casi todo el contorno en el primer
+   * tercio, así que saltaba en vez de viajar— y `linear` funcionaba pero se
+   * leía mecánico, como una barra de progreso. Arrancar lento y acelerar hace
+   * que el ojo alcance a enganchar el punto de partida, que es lo que vuelve
+   * legible el recorrido.
+   *
+   * Termina a velocidad máxima y la vuelta de espera arranca a ritmo parejo,
+   * así que en el click hay un cambio de velocidad. Es deliberado: ahí el
+   * trazo dejó de ser respuesta a tu gesto y pasó a ser el sistema esperando,
+   * y son dos cosas distintas. Igual casi nunca coinciden — ver el comentario
+   * sobre `useLinkStatus` en components/CaseOutline.tsx. */
+  transition: stroke-dashoffset var(--duration-lap) var(--ease-in);
+}
+
+/* Una vuelta más, encadenada, mientras se espera. Parte de 0 —donde la dejó el
+ * hover— y llega a -100, que es el mismo contorno una vuelta después. */
+@keyframes case-lap {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
 /* Entrada del hero: un solo momento orquestado al cargar la página, no un
  * fade-and-slide por cada sección al hacer scroll (eso es justo lo que delata
  * una plantilla). El escalonado va por --rise-delay desde el componente. */
@@ -269,6 +401,96 @@
   animation-delay: var(--rise-delay, 0ms);
 }
 
+/* --- Transiciones de vista -------------------------------------------------
+ * Habilitadas por `experimental.viewTransition` en next.config.ts.
+ *
+ * Hay DOS y no más. Se descartaron a propósito los slides direccionales, los
+ * `transitionTypes` y las transiciones de Suspense que documenta Next: mueven
+ * cosas en pantalla sin decirle al visitante nada que no sepa ya, y el sistema
+ * pide que el movimiento sea terminación y no contenido.
+ *
+ *   1. El crossfade entre páginas. No lo declara ningún componente: es la
+ *      transición de raíz del navegador, o sea todo lo que no tenga un
+ *      `view-transition-name` propio. Por eso el cromo se ancla abajo.
+ *   2. El morph de la captura al entrar a un caso. Esa sí la declaran
+ *      CaseCard y la página de detalle, con el mismo `name`.
+ *
+ * Todas las duraciones y la curva salen de los tokens de arriba. */
+
+::view-transition-old(root) {
+  animation: fade var(--duration-fast) var(--ease-out) both reverse;
+}
+
+::view-transition-new(root) {
+  /* Entra después de que el anterior terminó de irse, y más lento. Si se
+   * cruzan, los dos se ven al 50% a la vez y el resultado es un parpadeo gris
+   * en vez de un relevo. */
+  animation: fade var(--duration-base) var(--ease-out) var(--duration-fast) both;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* El cromo no participa. Header, pie y botón flotante son idénticos en todas
+ * las páginas: si se desvanecen con el contenido, la pantalla entera parpadea
+ * y el visitante pierde el único punto fijo que tenía.
+ *
+ * `display: none` sobre el snapshot viejo evita el fotograma en que se ven los
+ * dos superpuestos. El z-index deja al header por encima del contenido que se
+ * está cambiando por debajo. */
+header {
+  view-transition-name: site-header;
+}
+
+footer {
+  view-transition-name: site-footer;
+}
+
+.vt-float {
+  view-transition-name: whatsapp-float;
+}
+
+::view-transition-group(site-header) {
+  z-index: 100;
+}
+
+::view-transition-group(site-header),
+::view-transition-group(site-footer),
+::view-transition-group(whatsapp-float),
+::view-transition-new(site-header),
+::view-transition-new(site-footer),
+::view-transition-new(whatsapp-float) {
+  animation: none;
+}
+
+::view-transition-old(site-header),
+::view-transition-old(site-footer),
+::view-transition-old(whatsapp-float) {
+  display: none;
+}
+
+/* El morph de la captura: la misma imagen creciendo desde su celda en /casos
+ * hasta el ancho completo del detalle. Es lo único que justifica toda esta
+ * maquinaria — dice "la misma cosa, más cerca", que es información, no adorno.
+ *
+ * Origen y destino son los dos `aspect-16/9` (ver scripts/shots.mjs): si no lo
+ * fueran, el morph deformaría la imagen a mitad de camino. */
+::view-transition-group(.case-morph) {
+  animation-duration: var(--duration-slow);
+  animation-timing-function: var(--ease-out);
+}
+
+::view-transition-image-pair(.case-morph) {
+  animation-duration: var(--duration-slow);
+  animation-timing-function: var(--ease-out);
+}
+
 ::selection {
   background: var(--color-surface-accent-tint);
   color: var(--color-text-primary);
@@ -283,14 +505,36 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* El complemento del `text-balance` de los titulares: `pretty` reparte las
+ * últimas líneas de un párrafo para que ninguna quede con una sola palabra.
+ * Va como regla base y no como utilidad porque no hay un solo párrafo del
+ * sitio que quiera lo contrario. */
+p {
+  text-wrap: pretty;
+}
+
 /* El scroll suave y el ancla del header sticky se pelean: sin esto, saltar a
  * una sección la deja escondida detrás de la barra. */
 :target {
   scroll-margin-top: 6rem;
 }
 
-/* Quien pidió menos movimiento no recibe ni la deriva del hero, ni la entrada
- * escalonada, ni el scroll suave. */
+/* Quien pidió menos movimiento no recibe ni la entrada escalonada del hero, ni
+ * el scroll suave, ni el crossfade entre páginas, ni el morph de la captura, ni
+ * el recorrido del contorno de las tarjetas de caso.
+ *
+ * Lo que SÍ sigue recibiendo son las transiciones de color, y es deliberado.
+ * Este bloque tenía el `transition-duration: 0.01ms !important` sobre `*` que
+ * se copia y pega en todos lados, y era más de lo que la preferencia pide: un
+ * cambio de color no es movimiento, y apagarlo deja todo el sistema de hover
+ * del sitio seco y abrupto sin que nadie gane nada. La preferencia es sobre
+ * cosas que se desplazan, crecen o vuelan — no sobre que un link cambie de
+ * color en 120ms.
+ *
+ * Ojo si agregás una transición nueva: `transition-brand` solo mueve color,
+ * background-color, border-color y box-shadow — `transform` está fuera a
+ * propósito. Mientras siga así, no hay ninguna transición de posición que
+ * apagar. Si algún día metés una, apagala acá por nombre, como el contorno. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -301,8 +545,24 @@ body {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* El `*` de arriba no alcanza: las pseudo-clases de transición de vista viven
+   * fuera del árbol del documento y ningún selector de elementos las toca. Hay
+   * que apagarlas por su cuenta, o el morph sigue corriendo. */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+
+  /* La única transición del sitio que es un recorrido y no un cambio de color.
+   * El contorno sigue apareciendo —la señal de hover no se pierde— pero se
+   * pone de una vez en lugar de viajar por el perímetro. */
+  .case-outline {
+    transition-duration: 0.01ms !important;
   }
 
   /* `rise` parte en opacity:0 y llega a 1 por animación. Con la animación

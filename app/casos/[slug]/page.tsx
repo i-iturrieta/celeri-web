@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ViewTransition } from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -107,19 +108,33 @@ export default async function CaseDetailPage({
       </section>
 
       {/* La captura entra a sangre completa y sin marco: es lo que el visitante
-          vino a ver, y encajonarla en una tarjeta con borde la encoge. */}
-      <div className="relative aspect-[16/9] w-full sm:aspect-[21/9]">
-        <Image
-          src={caseStudy.image}
-          alt={`Captura del sitio de ${caseStudy.client}`}
-          fill
-          sizes="100vw"
-          priority
-          className="object-cover"
-        />
+          vino a ver, y encajonarla en una tarjeta con borde la encoge.
+
+          16:9 fijo, sin el 21:9 de antes en pantallas grandes: es la proporción
+          en la que se captura (scripts/shots.mjs) y la misma de la tarjeta en
+          /casos, así que la imagen ya no se recorta al llegar acá. */}
+      <div className="relative aspect-[16/9] w-full">
+        {/* El destino del morph. El origen es la misma imagen dentro de
+            CaseCard, con este mismo `name`: al llegar acá, la captura que
+            estabas mirando en la tarjeta crece hasta ocupar el ancho completo.
+            Ver la nota en components/CaseCard.tsx. */}
+        <ViewTransition
+          name={`case-${caseStudy.slug}`}
+          share="case-morph"
+          default="none"
+        >
+          <Image
+            src={caseStudy.image}
+            alt={`Captura del sitio de ${caseStudy.client}`}
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover"
+          />
+        </ViewTransition>
       </div>
 
-      <Container as="section" className="pt-20 pb-24 sm:pt-24 sm:pb-28">
+      <Container as="section" className="section-open">
         <div className="grid gap-x-16 gap-y-14 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)]">
           <div>
             {SECTIONS.map(({ key, label }) => (

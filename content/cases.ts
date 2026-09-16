@@ -4,6 +4,16 @@ export type CaseStudy = {
   url: string;
   /** Bajada corta para las tarjetas y la meta description. */
   summary: string;
+  /**
+   * El rubro, en dos o tres palabras y en minúscula: va bajo el nombre del
+   * cliente en la franja del hero.
+   *
+   * No es copy nuevo — sale del propio `problem` de cada caso ("Waiki fabrica
+   * estufas a pellet", "Vendía embarcaciones"). Está acá y no escrito en el
+   * componente porque es contenido, y todo el contenido del sitio vive en
+   * `content/`.
+   */
+  sector: string;
   image: string;
   tags: string[];
   /**
@@ -32,6 +42,7 @@ export const cases: CaseStudy[] = [
     kind: "client",
     summary:
       "Antes de dibujar una sola pantalla, dediqué tiempo a entender cómo se mueve una propiedad desde que está disponible hasta que se reserva — porque eso, no un catálogo bonito, era lo que el sitio tenía que resolver.",
+    sector: "corredora de propiedades",
     image: "/cases/mirador-hero.webp",
     tags: [
       "Panel de administración a medida",
@@ -53,6 +64,7 @@ export const cases: CaseStudy[] = [
     kind: "client",
     summary:
       "Un rediseño completo partiendo solo de la marca, las imágenes y los textos que ya tenían: el contenido era bueno, lo que fallaba era cómo se llegaba a él.",
+    sector: "estufas a pellet",
     image: "/cases/waiki-hero.webp",
     tags: [
       "Rediseño completo",
@@ -74,6 +86,7 @@ export const cases: CaseStudy[] = [
     kind: "client",
     summary:
       "Una marca que existía pero no tenía dónde vivir, y embarcaciones que se vendían sin un lugar propio donde publicarlas.",
+    sector: "venta de embarcaciones",
     image: "/cases/boatmarket-hero.webp",
     tags: [
       "Publicaciones autogestionables",

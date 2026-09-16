@@ -1,7 +1,9 @@
+import { ViewTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { CaseStudy } from "@/content/cases";
+import CaseOutline from "@/components/CaseOutline";
 
 type CaseCardProps = {
   caseStudy: CaseStudy;
@@ -47,20 +49,54 @@ export default function CaseCard({
            el lector de pantalla lee el caso duplicado. */
         aria-hidden="true"
         tabIndex={-1}
-        className={`relative aspect-[16/10] overflow-hidden bg-surface-sunken ${
+        /* 16:9, que es la proporción en la que se capturan (ver scripts/shots.mjs)
+           y la misma que usa la imagen a sangre del detalle. Cuando esto era
+           16:10, `object-cover` le recortaba una franja distinta a cada captura
+           según dónde cayera su contenido. */
+        /* Sin `overflow-hidden`: estaba para contener el `scale` del hover, que
+           ya no existe. Con él puesto, el contorno ámbar perdía la mitad de su
+           grosor contra los cuatro bordes. La imagen no se sale sola — es
+           `fill` con object-cover. */
+        className={`relative aspect-[16/9] bg-surface-sunken ${
           reverse ? "lg:order-2" : ""
         }`}
       >
-        <Image
-          src={caseStudy.image}
-          alt=""
-          fill
-          /* Sin `sizes`, next/image sirve la variante de 3840px a todo el mundo
-           * para un hueco que nunca pasa de ~680px. */
-          sizes="(max-width: 1024px) 100vw, 680px"
-          priority={priority}
-          className="transition-brand object-cover duration-500 group-hover:scale-[1.025]"
-        />
+        {/* El otro extremo del morph está en app/casos/[slug]/page.tsx, con
+            este mismo `name`. Al entrar al caso, esta captura crece hasta el
+            ancho completo en vez de desaparecer y aparecer otra.
+
+            `default="none"` la deja quieta en cualquier otra navegación: sin
+            eso, la imagen se anima también cuando el morph no tiene con quién
+            emparejarse. El nombre es único por página — cada slug aparece una
+            sola vez tanto en el home como en /casos. */}
+        <ViewTransition
+          name={`case-${caseStudy.slug}`}
+          share="case-morph"
+          default="none"
+        >
+          <Image
+            src={caseStudy.image}
+            alt=""
+            fill
+            /* Sin `sizes`, next/image sirve la variante de 3840px a todo el mundo
+             * para un hueco que nunca pasa de ~680px. */
+            sizes="(max-width: 1024px) 100vw, 680px"
+            priority={priority}
+            /* Sin hover propio. Tenía un `group-hover:scale-[1.025]` que no
+               animaba nunca: `transition-brand` no lista `transform` entre sus
+               propiedades — está sacado a propósito, el sistema prohíbe el scale
+               como estado — así que el salto era instantáneo y el `duration-500`
+               no aplicaba a nada. Quien pasa por acá recibe la señal en el
+               título, que sí cambia de color. */
+            className="object-cover"
+          />
+        </ViewTransition>
+
+        {/* Va fuera del <ViewTransition> a propósito: si quedara adentro, el
+            contorno viajaría en el morph junto con la captura y se vería una
+            línea ámbar estirándose por la pantalla. Lo que morfea es la
+            imagen; el contorno pertenece a la tarjeta que se deja atrás. */}
+        <CaseOutline />
       </Link>
 
       <div className={reverse ? "lg:order-1" : ""}>
@@ -73,7 +109,11 @@ export default function CaseCard({
         <Heading className="font-display text-h2 text-balance text-text-primary">
           <Link
             href={detailHref}
-            className="focus-ring transition-brand decoration-1 underline-offset-[7px] hover:text-text-accent hover:underline"
+            /* Responde al hover propio y al de la tarjeta entera: la imagen de
+               al lado apunta al mismo destino pero está aria-hidden, así que es
+               este título el que tiene que acusar recibo cuando el cursor pasa
+               por ella. Cambio de color sólido, como manda el sistema. */
+            className="focus-ring transition-brand decoration-1 underline-offset-[7px] group-hover:text-text-accent group-hover:underline hover:text-text-accent hover:underline"
           >
             {caseStudy.client}
           </Link>

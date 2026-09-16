@@ -43,13 +43,19 @@ function MoreLink({ href, children }: { href: string; children: string }) {
  * profundo. No es decoración — es lo que hace que al hacer scroll se note que
  * cambió de tema. Cuando las cuatro secciones compartían el mismo fondo cream y
  * la misma tarjeta redondeada, la página se leía como un solo bloque plano.
+ *
+ * El ritmo vertical tampoco es parejo, y también a propósito (ver las
+ * utilidades `section-*` en globals.css). Servicios entra `tight` porque sigue
+ * la conversación del hero; el proceso va `base` y ya viene separado por su
+ * propia banda; los casos van `loose` porque son la vitrina. Cuando las tres
+ * corrían al mismo `py-24 sm:py-28`, el scroll sonaba a metrónomo.
  */
 export default function HomePage() {
   return (
     <>
       <Hero />
 
-      <Container as="section" className="py-24 sm:py-28">
+      <Container as="section" className="section-tight">
         <SectionHeading
           title="En qué puedo ayudarte"
           subtitle="Cada uno responde a un problema puntual que me han contado en conversaciones reales."
@@ -61,7 +67,7 @@ export default function HomePage() {
       </Container>
 
       <section className="border-y rule bg-surface-sunken">
-        <Container className="py-24 sm:py-28">
+        <Container className="section-base">
           <SectionHeading
             title="De la conversación al sitio publicado"
             subtitle="Cuatro pasos. Sabes en qué van sin tener que preguntarme."
@@ -73,7 +79,7 @@ export default function HomePage() {
       </section>
 
       {clientCases.length > 0 && (
-        <Container as="section" className="py-24 sm:py-28">
+        <Container as="section" className="section-loose">
           <SectionHeading
             title="Negocios que ya están usando su sitio"
             subtitle="Esto es lo que quedó cuando el proyecto pasó de la idea a producción."

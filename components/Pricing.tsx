@@ -28,7 +28,7 @@ export default function Pricing() {
   const hasPromo = plans.some((p) => p.discountPct);
 
   return (
-    <Container as="section" id="precios" className="py-20">
+    <Container as="section" id="precios" className="section-tight">
       <SectionHeading
         title="Cuánto cuesta"
         subtitle="Precios de referencia, en pesos y sin letra chica. El monto final depende de cuántas páginas y cuánto contenido haya; te lo digo antes de empezar, no después."

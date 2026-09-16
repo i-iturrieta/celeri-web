@@ -79,6 +79,18 @@ export default function RootLayout({
           Saltar al contenido
         </a>
 
+        {/* El crossfade entre páginas no se envuelve acá: lo hace la
+            transición de raíz del navegador, que es exactamente eso — todo lo
+            que no tiene un `view-transition-name` propio se desvanece junto.
+            Envolver <main> en un <ViewTransition> agregaba un grupo cuyo
+            tamaño cambia de página a página, y con él un aplastamiento
+            vertical que había que apagar a mano.
+
+            Lo que sí hay que hacer es sacar el cromo de esa transición: el
+            header, el pie y el botón flotante son idénticos en todas las
+            páginas y si parpadean junto con el contenido se pierde el punto de
+            referencia. Se anclan por nombre en globals.css, bajo
+            "Transiciones de vista". */}
         <Header />
         <main id="contenido" className="flex-1">
           {children}

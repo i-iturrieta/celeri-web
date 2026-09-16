@@ -65,11 +65,20 @@ export default function PricingCard({
 
       <div>
         <p className="flex items-baseline gap-1.5">
-          <span className="font-display text-4xl font-extrabold">{price}</span>
+          {/* `tabular-nums` fuerza el mismo ancho para todos los dígitos. Sin
+              esto, $110.000 y $336.000 ocupan anchos distintos y los tres
+              precios no alinean entre tarjetas — que es justo lo que el
+              visitante está haciendo cuando mira esta sección: compararlos. */}
+          <span className="font-display text-4xl font-extrabold tabular-nums">
+            {price}
+          </span>
           {period && (
             <span
+              /* `whitespace-nowrap`: "pago único" es una unidad y al lado de un
+                 precio ancho se partía en dos líneas, dejando la tarjeta con
+                 un escalón donde debería haber una línea de base. */
               className={cn(
-                "text-sm",
+                "text-sm whitespace-nowrap",
                 highlighted ? "text-text-on-inverse-muted" : "text-text-muted",
               )}
             >
@@ -84,7 +93,7 @@ export default function PricingCard({
         {originalPrice && (
           <p
             className={cn(
-              "mt-1 text-sm",
+              "mt-1 text-sm tabular-nums",
               highlighted ? "text-text-on-inverse-muted" : "text-text-muted",
             )}
           >

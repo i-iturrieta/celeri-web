@@ -59,7 +59,7 @@ export default function ContactPage() {
       {/* Dos vías, no más. Un formulario propio agregaba un punto de falla
           silencioso — si el envío se caía, el lead se perdía sin que nadie se
           enterara — y el cliente que buscamos escribe por WhatsApp igual. */}
-      <Container as="section" className="pt-16 pb-24 sm:pt-20 sm:pb-28">
+      <Container as="section" className="section-open">
         <ul className="border-b rule">
           {CHANNELS.map((channel) => (
             <li key={channel.label} className="border-t rule">

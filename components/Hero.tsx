@@ -21,6 +21,27 @@ import { Button } from "@/components/ui";
  * El titular se lleva todo el presupuesto tipográfico y lo de alrededor se
  * mantiene callado a propósito.
  */
+/**
+ * Los datos duros de la portada.
+ *
+ * Dos, no tres, y es una decisión tomada — no un hueco pendiente. El tercero
+ * natural sería el plazo de entrega, y se descartó porque varía demasiado de
+ * proyecto a proyecto: un número que en la práctica cambia no es un dato duro,
+ * es una promesa que después hay que sostener por WhatsApp. Un rango vago
+ * ("2 a 8 semanas") tampoco dice nada y encima resta.
+ *
+ * Los dos que quedan se sostienen solos: el primero sale de content/cases.ts y
+ * el segundo es la promesa que ya hace el titular.
+ *
+ * La reja es `sm:grid-cols-3` con la tercera celda vacía a propósito: alinea
+ * las reglas verticales con la franja de clientes de abajo. No la bajes a
+ * `grid-cols-2` para "arreglar" el hueco.
+ */
+const STATS = [
+  { value: String(clientCases.length), label: "negocios en línea" },
+  { value: "1", label: "persona, de principio a fin" },
+];
+
 export default function Hero() {
   return (
     <section className="bg-surface-inverse">
@@ -35,7 +56,11 @@ export default function Hero() {
         </p>
 
         <h1
-          className="rise font-display mt-5 max-w-[16ch] text-5xl leading-tight font-bold tracking-tight text-balance text-text-on-inverse"
+          /* `tracking-tighter` (-0.03em) y no el -0.02em del resto de los
+             titulares: este es el único texto del sitio que llega a 4rem, y el
+             tracking óptico tiene que cerrarse a medida que el tamaño sube o
+             los caracteres se ven sueltos. */
+          className="rise font-display mt-5 max-w-[16ch] text-5xl leading-tight font-bold tracking-tighter text-balance text-text-on-inverse"
           style={{ "--rise-delay": "60ms" } as React.CSSProperties}
         >
           Sitios web simples, hechos por una sola persona
@@ -71,24 +96,62 @@ export default function Hero() {
       </Container>
 
       {/* Prueba, no adorno: los negocios reales que están en línea ahora mismo,
-          arriba del pliegue y antes de cualquier promesa. */}
+          arriba del pliegue y antes de cualquier promesa.
+
+          Va en dos filas separadas por reglas finas, no en una lista con gaps.
+          El bloque oscuro del hero no admite gradientes ni texturas — el
+          sistema los prohíbe por nombre — así que lo único que puede darle
+          peso es estructura visible. Las reglas son esa estructura. */}
       {clientCases.length > 0 && (
         <Container
-          className="rise border-t border-border-inverse pt-7 pb-9"
+          className="rise"
           style={{ "--rise-delay": "420ms" } as React.CSSProperties}
         >
-          <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3">
+          {/* Tres columnas en desktop aunque hoy los datos sean dos: así las
+              reglas verticales caen en el mismo sitio que las de la franja de
+              clientes de abajo, y las dos filas comparten una reja visible en
+              vez de ser dos bandas sueltas. La tercera celda, vacía, es donde
+              entra el plazo cuando se confirme. */}
+          <dl className="grid grid-cols-2 border-t border-border-inverse sm:grid-cols-3 sm:divide-x sm:divide-border-inverse">
+            {STATS.map((stat, i) => (
+              <div
+                key={stat.label}
+                /* flex-col-reverse: el número va arriba en pantalla, pero en el
+                   DOM el <dt> tiene que preceder a su <dd>. */
+                className={`flex flex-col-reverse gap-1.5 py-7 ${
+                  i === 0 ? "pr-8 sm:pr-8" : "pl-8 sm:pl-8"
+                }`}
+              >
+                <dt className="label-mono text-text-on-inverse-muted">
+                  {stat.label}
+                </dt>
+                <dd className="font-display text-3xl font-bold tabular-nums text-text-on-inverse">
+                  {stat.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          <div className="border-t border-border-inverse pt-7 pb-9">
             <p className="label-mono text-text-on-inverse-muted">
               En línea ahora mismo
             </p>
-            <ul className="flex flex-wrap items-baseline gap-x-7 gap-y-3">
+            <ul className="mt-5 grid gap-y-5 sm:grid-cols-3 sm:gap-y-0 sm:divide-x sm:divide-border-inverse">
               {clientCases.map((c) => (
-                <li key={c.slug}>
+                <li key={c.slug} className="sm:px-8 sm:first:pl-0 sm:last:pr-0">
                   <Link
                     href={`/casos/${c.slug}`}
-                    className="focus-ring transition-brand font-display text-[17px] font-semibold text-text-on-inverse hover:text-surface-accent"
+                    className="focus-ring transition-brand group block text-text-on-inverse hover:text-surface-accent"
                   >
-                    {c.client}
+                    <span className="font-display block text-[17px] font-semibold">
+                      {c.client}
+                    </span>
+                    {/* El rubro sale de content/cases.ts. Un nombre solo no le
+                        dice nada a quien no conoce al cliente; con el rubro,
+                        la franja pasa de ser una lista a ser una ficha. */}
+                    <span className="label-mono transition-brand mt-1.5 block text-text-on-inverse-muted group-hover:text-text-on-inverse">
+                      {c.sector}
+                    </span>
                   </Link>
                 </li>
               ))}

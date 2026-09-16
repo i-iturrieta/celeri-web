@@ -35,7 +35,7 @@ export default function ServicesPage() {
         lead="Elegimos juntos el que le sirve a tu negocio, no el que suena mejor. Cada uno parte del problema, no de la tecnología."
       />
 
-      <Container as="section" className="pt-20 pb-24 sm:pt-24 sm:pb-28">
+      <Container as="section" className="section-open">
         <ServiceList services={services} headingLevel="h2" />
       </Container>
 
@@ -45,7 +45,7 @@ export default function ServicesPage() {
       <Pricing />
 
       <section className="border-y rule bg-surface-sunken">
-        <Container className="py-24 sm:py-28">
+        <Container className="section-base">
           <SectionHeading
             title="Lo que todos preguntan antes de empezar"
             subtitle="Plazos, pagos y qué pasa después de publicar. Si falta algo, escríbeme y lo agrego."
