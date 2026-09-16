@@ -1,6 +1,7 @@
 import { waLink } from "@/lib/whatsapp";
 import Container from "@/components/Container";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { Button } from "@/components/ui";
 
 type CTASectionProps = {
   title?: string;
@@ -26,24 +27,29 @@ function Inner({
   Pick<CTASectionProps, "message">) {
   return (
     <>
-      <h2 className="font-display max-w-[18ch] text-h1 text-balance text-on-dark">
+      <h2 className="font-display max-w-[18ch] text-4xl leading-tight font-bold tracking-tight text-balance text-text-primary">
         {title}
       </h2>
-      <p className="mt-6 max-w-[54ch] text-lead text-on-dark-muted">
+      <p className="mt-6 max-w-[54ch] text-lg/relaxed text-text-secondary">
         {subtitle}
       </p>
-      {/* El único uso del latón a plena saturación en todo el sitio. Funciona
-          porque es el único: si el latón estuviera además en los links, los
-          bordes y los íconos, este botón no destacaría sobre nada. */}
-      <a
+
+      {/* Secundario y no ámbar, a propósito. El ámbar primario está reservado
+          al llamado principal de cada página — el del hero en el home, el del
+          plan recomendado en servicios. Si esta banda también fuera ámbar,
+          habría dos en la misma pantalla y ninguno de los dos significaría
+          "empezá por acá". */}
+      <Button
+        variant="secondary"
+        size="lg"
         href={waLink(message)}
         target="_blank"
         rel="noopener noreferrer"
-        className="focus-ring-inverse transition-brand mt-10 inline-flex items-center gap-2.5 bg-brass px-7 py-4 text-small font-medium text-petrol-deeper hover:bg-on-dark"
+        icon={<WhatsAppIcon className="h-[18px] w-[18px]" />}
+        className="mt-10"
       >
-        <WhatsAppIcon className="h-[18px] w-[18px]" />
         Hablemos por WhatsApp
-      </a>
+      </Button>
     </>
   );
 }
@@ -51,24 +57,17 @@ function Inner({
 /**
  * El cierre.
  *
- * El fondo no es un rectángulo de color plano: lleva una luz radial fría
- * desplazada hacia una esquina. Es lo que separa una banda que se ve
- * profunda de una que se ve como un div pintado — y cuesta un gradiente.
+ * Bloque de color plano sobre la superficie hundida del sistema. Antes era una
+ * banda oscura con dos luces radiales por detrás; se fueron las dos porque el
+ * design system pide fondos planos y prohíbe los gradientes, y se fue también
+ * el oscuro porque el pie volvió a ser oscuro y los dos juntos se fundían en
+ * un solo bloque negro donde el llamado a la acción no destacaba contra nada.
+ *
+ * El orden de superficies que sostiene esto es papel → caliza → pie oscuro.
+ * Cambiar una de las tres obliga a revisar las otras dos.
  */
 function Surface({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="relative isolate overflow-hidden bg-petrol-deeper">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(120%_110%_at_88%_0%,var(--color-petrol)_0%,transparent_58%)] opacity-70"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(80%_70%_at_6%_100%,var(--color-brass)_0%,transparent_55%)] opacity-[0.14]"
-      />
-      {children}
-    </div>
-  );
+  return <div className="bg-surface-sunken">{children}</div>;
 }
 
 export default function CTASection({

@@ -12,6 +12,8 @@ const WIDTHS = {
 
 type ContainerProps = {
   children: ReactNode;
+  /** Ancla de la sección, para los enlaces internos del menú. */
+  id?: string;
   /** Etiqueta a renderizar. `div` por defecto; usa `section` para bloques de página. */
   as?: ElementType;
   width?: keyof typeof WIDTHS;
@@ -28,6 +30,7 @@ type ContainerProps = {
  */
 export default function Container({
   children,
+  id,
   as: Tag = "div",
   width = "default",
   className = "",
@@ -35,6 +38,7 @@ export default function Container({
 }: ContainerProps) {
   return (
     <Tag
+      id={id}
       className={`mx-auto w-full ${WIDTHS[width]} px-6 sm:px-8 ${className}`}
       style={style}
     >

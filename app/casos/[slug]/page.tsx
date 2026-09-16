@@ -70,27 +70,27 @@ export default async function CaseDetailPage({
         ])}
       />
 
-      <section className="border-b rule bg-limestone">
+      <section className="border-b rule bg-surface-sunken">
         <Container className="pt-10 pb-16 sm:pb-20">
           <nav aria-label="Migas de pan" className="mb-12">
             <Link
               href="/casos"
-              className="focus-ring transition-brand text-small text-ink-subtle hover:text-petrol"
+              className="focus-ring transition-brand text-small text-text-muted hover:text-text-accent"
             >
               Todos los casos
             </Link>
           </nav>
 
           {caseStudy.kind === "demo" && (
-            <p className="mb-6 inline-block border rule px-2.5 py-1 text-micro text-ink-subtle">
+            <p className="mb-6 inline-block border rule px-2.5 py-1 text-micro text-text-muted">
               Ejemplo, no es un cliente
             </p>
           )}
 
-          <h1 className="font-display max-w-[16ch] text-h1 text-balance text-ink">
+          <h1 className="font-display max-w-[16ch] text-h1 text-balance text-text-primary">
             {caseStudy.client}
           </h1>
-          <p className="mt-7 max-w-[58ch] text-lead text-ink-muted">
+          <p className="mt-7 max-w-[58ch] text-lead text-text-secondary">
             {caseStudy.summary}
           </p>
 
@@ -98,7 +98,7 @@ export default async function CaseDetailPage({
             href={caseStudy.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="focus-ring transition-brand mt-8 inline-flex items-center gap-1.5 text-small text-ink underline decoration-ink/30 decoration-1 underline-offset-[6px] hover:text-petrol hover:decoration-2 hover:decoration-petrol"
+            className="focus-ring transition-brand mt-8 inline-flex items-center gap-1.5 text-small text-text-primary underline decoration-ink-950/30 decoration-1 underline-offset-[6px] hover:text-text-accent hover:decoration-2 hover:decoration-text-accent"
           >
             {displayUrl}
             <ArrowUpRight size={16} aria-hidden="true" />
@@ -127,8 +127,8 @@ export default async function CaseDetailPage({
                 key={key}
                 className="border-t rule pt-9 pb-11 first:border-t-0 first:pt-0 last:pb-0"
               >
-                <h2 className="font-display text-h2 text-ink">{label}</h2>
-                <p className="mt-6 max-w-[64ch] text-body text-ink-muted">
+                <h2 className="font-display text-h2 text-text-primary">{label}</h2>
+                <p className="mt-6 max-w-[64ch] text-body text-text-secondary">
                   {caseStudy[key]}
                 </p>
               </article>
@@ -138,12 +138,12 @@ export default async function CaseDetailPage({
           {/* La ficha va al costado, no al final: es material de referencia,
               no el siguiente capítulo de la historia. */}
           <aside className="lg:pt-1">
-            <h2 className="text-small text-ink-subtle">Qué incluyó</h2>
+            <h2 className="text-small text-text-muted">Qué incluyó</h2>
             <ul className="mt-6 border-b rule">
               {caseStudy.tags.map((tag) => (
                 <li
                   key={tag}
-                  className="border-t rule py-4 text-small text-ink"
+                  className="border-t rule py-4 text-small text-text-primary"
                 >
                   {tag}
                 </li>

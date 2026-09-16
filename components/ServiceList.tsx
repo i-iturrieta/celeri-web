@@ -51,22 +51,25 @@ export default function ServiceList({
               : "md:grid-cols-[minmax(0,6fr)_minmax(0,11fr)]"
           }`}
         >
-          <Heading className="font-display text-h2 text-balance text-ink">
+          <Heading className="font-display text-h2 text-balance text-text-primary">
             {service.title}
           </Heading>
 
           <div className="max-w-[60ch]">
             {detail === "compact" ? (
-              <p className="text-lead text-ink-muted">{service.teaser}</p>
+              <p className="text-lead text-text-secondary">{service.teaser}</p>
             ) : (
               <>
-                <p className="text-body text-ink-muted">{service.problem}</p>
-                {/* La regla de latón marca cuál de los dos párrafos es el
-                    resultado. El color hace de etiqueta, así que no hace falta
-                    escribir "Resultado:" ni colgarle una flecha delante. */}
-                <p className="mt-5 border-l-2 border-brass pl-5 text-body text-ink">
-                  {service.outcome}
-                </p>
+                <p className="text-body text-text-secondary">{service.problem}</p>
+                {/* Qué distingue este párrafo del anterior: antes era una
+                    regla ámbar al costado, pero el design system prohíbe por
+                    nombre el borde de color a la izquierda de un bloque de
+                    contenido. La etiqueta en mono es el recurso que el propio
+                    sistema usa para esto, y además dice qué es en vez de
+                    depender de que el lector interprete un color — que es
+                    justo lo que no funciona si no distingues ese color. */}
+                <p className="label-mono mt-6 text-text-accent">Resultado</p>
+                <p className="mt-2 text-body text-text-primary">{service.outcome}</p>
               </>
             )}
           </div>

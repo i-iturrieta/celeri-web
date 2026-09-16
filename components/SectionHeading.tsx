@@ -35,7 +35,7 @@ export default function SectionHeading({
     <div className="border-t rule pt-8">
       <div className="flex flex-wrap items-baseline justify-between gap-x-10 gap-y-4">
         <Tag
-          className={`font-display max-w-[20ch] text-balance text-ink ${
+          className={`font-display max-w-[20ch] text-balance text-text-primary ${
             Tag === "h1" ? "text-h1" : "text-h2"
           }`}
         >
@@ -44,7 +44,7 @@ export default function SectionHeading({
         {aside}
       </div>
       {subtitle && (
-        <p className="mt-5 max-w-[58ch] text-body text-ink-muted">{subtitle}</p>
+        <p className="mt-5 max-w-[58ch] text-body text-text-secondary">{subtitle}</p>
       )}
     </div>
   );

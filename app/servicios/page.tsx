@@ -7,6 +7,7 @@ import Container from "@/components/Container";
 import PageHeader from "@/components/PageHeader";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceList from "@/components/ServiceList";
+import Pricing from "@/components/Pricing";
 import CTASection from "@/components/CTASection";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
@@ -38,7 +39,12 @@ export default function ServicesPage() {
         <ServiceList services={services} headingLevel="h2" />
       </Container>
 
-      <section className="border-y rule bg-limestone">
+      {/* El precio va acá y no en una página propia: quien terminó de leer los
+          servicios ya tiene la pregunta en la cabeza, y mandarlo a otra ruta
+          para responderla pierde a la mitad. */}
+      <Pricing />
+
+      <section className="border-y rule bg-surface-sunken">
         <Container className="py-24 sm:py-28">
           <SectionHeading
             title="Lo que todos preguntan antes de empezar"

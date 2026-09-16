@@ -13,15 +13,15 @@ export default function Loading() {
   return (
     <Container className="py-24">
       <div className="animate-pulse" aria-hidden="true">
-        <div className="h-14 w-4/5 bg-ink/[0.07]" />
-        <div className="mt-4 h-14 w-2/5 bg-ink/[0.07]" />
-        <div className="mt-9 h-4 w-1/2 bg-ink/[0.07]" />
+        <div className="h-14 w-4/5 bg-ink-950/[0.07]" />
+        <div className="mt-4 h-14 w-2/5 bg-ink-950/[0.07]" />
+        <div className="mt-9 h-4 w-1/2 bg-ink-950/[0.07]" />
 
         <div className="mt-20 border-b rule">
           {[0, 1, 2].map((i) => (
             <div key={i} className="border-t rule py-10">
-              <div className="h-7 w-1/3 bg-ink/[0.07]" />
-              <div className="mt-4 h-4 w-2/3 bg-ink/[0.07]" />
+              <div className="h-7 w-1/3 bg-ink-950/[0.07]" />
+              <div className="mt-4 h-4 w-2/3 bg-ink-950/[0.07]" />
             </div>
           ))}
         </div>

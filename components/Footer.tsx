@@ -6,7 +6,6 @@ import Container from "@/components/Container";
 const NAV_LINKS = [
   { href: "/servicios", label: "Servicios" },
   { href: "/casos", label: "Casos" },
-  { href: "/sobre-mi", label: "Sobre mí" },
   { href: "/contacto", label: "Contacto" },
 ];
 
@@ -17,36 +16,44 @@ function formatPhone(whatsapp: string): string {
 }
 
 const LINK_CLASS =
-  "focus-ring transition-brand text-small text-ink-muted hover:text-petrol";
+  "focus-ring transition-brand text-sm text-text-on-inverse-muted hover:text-text-on-inverse";
 
 /**
- * El pie va en caliza, no en oscuro.
+ * El pie.
  *
- * Antes el cierre de cada página era una banda oscura e inmediatamente debajo
- * venía un pie más oscuro todavía: los dos se fundían en un solo bloque negro
- * de media pantalla y la banda de cierre, que es el llamado a la acción,
- * dejaba de destacar sobre nada. En claro, la banda vuelve a ser el remate y el
- * pie vuelve a ser lo que es — información de referencia.
+ * Volvió a ser oscuro: el design system nombra nav, hero y pie como las tres
+ * superficies de marca. Estaba en claro por una razón concreta y documentada —
+ * la banda de cierre oscura quedaba justo encima y las dos se fundían en un
+ * solo bloque negro de media pantalla, dejando al llamado a la acción sin nada
+ * contra qué destacar.
+ *
+ * Esa razón se resolvió del otro lado: CTASection pasó a ser una banda clara.
+ * Ahora el contraste va papel → banda clara → pie oscuro, y cada pieza vuelve
+ * a leerse como lo que es. Si alguna vez la banda vuelve a oscuro, este pie
+ * tiene que volver a claro o reaparece el bloque negro.
  */
 export default function Footer() {
   return (
-    <footer className="bg-limestone text-ink">
+    <footer className="bg-surface-inverse text-text-on-inverse">
       <Container className="grid grid-cols-1 gap-x-12 gap-y-12 py-20 sm:grid-cols-[1.6fr_1fr_1fr]">
         <div>
           <Link
             href="/"
-            className="focus-ring transition-brand font-display text-[27px] leading-none tracking-[-0.035em] text-ink hover:text-petrol"
+            className="focus-ring transition-brand font-display text-[22px] leading-none font-bold tracking-tight text-text-on-inverse"
           >
-            {site.name}
+            {site.name.toLowerCase()}
+            <span className="text-surface-accent" aria-hidden="true">
+              .
+            </span>
           </Link>
-          <p className="mt-5 max-w-[34ch] text-small text-ink-muted">
+          <p className="mt-5 max-w-[34ch] text-sm text-text-on-inverse-muted">
             Sitios web para negocios que ya tienen clientes y necesitan un lugar
             propio donde mostrarse.
           </p>
         </div>
 
         <nav aria-label="Pie de página">
-          <p className="text-micro text-ink-subtle">Navegación</p>
+          <p className="label-mono text-text-on-inverse-muted">Navegación</p>
           <div className="mt-5 flex flex-col items-start gap-3">
             {NAV_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className={LINK_CLASS}>
@@ -57,7 +64,7 @@ export default function Footer() {
         </nav>
 
         <div>
-          <p className="text-micro text-ink-subtle">Contacto</p>
+          <p className="label-mono text-text-on-inverse-muted">Contacto</p>
           <div className="mt-5 flex flex-col items-start gap-3">
             <a
               href={waLink()}
@@ -76,11 +83,11 @@ export default function Footer() {
 
       {/* Un estudio de una persona firma su trabajo. La marca sola deja al
           visitante sin saber con quién va a hablar. */}
-      <Container className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-t rule py-8">
-        <p className="text-micro text-ink-subtle">
+      <Container className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3 border-t border-border-inverse py-8">
+        <p className="font-mono text-xs text-text-on-inverse-muted">
           © {new Date().getFullYear()} {site.name}
         </p>
-        <p className="text-micro text-ink-muted">
+        <p className="font-mono text-xs text-text-on-inverse-muted">
           Diseñado y programado por {site.owner}
         </p>
       </Container>

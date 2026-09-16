@@ -1,180 +1,252 @@
 @import "tailwindcss";
 
 /*
- * Sistema de diseño Celeri — "petróleo y latón".
+ * Sistema de diseño Celeri — importado desde Claude Design
+ * (proyecto "Celeri Design System", 6b056db9-2a2c-478b-bcc1-9e66e4569819).
  *
  * Regla: ningún componente inventa un color, un tamaño ni una transición
  * propia. Todo sale de los tokens de abajo. Si necesitas un valor que no está,
- * agrégalo aquí primero.
+ * agrégalo acá primero.
  *
- * La dirección en una línea: el petróleo dejó de ser un acento y pasó a ser el
- * color del sitio. El latón aparece poco y siempre significa algo. El papel es
- * frío, no cream — el cream cálido con acento terracota es el fondo por defecto
- * de medio internet y hacía que el sitio se leyera como plantilla.
+ * La dirección en una línea: marca dark-forward. La superficie de marca es
+ * tinta casi negra en bloques macizos (hero, footer, nav) contra un único
+ * acento vibrante, ámbar, usado con avaricia — CTAs, links, destacados y un
+ * "glow" de firma. El contenido largo vive sobre papel cálido, no blanco puro,
+ * para que la lectura sea editorial y no de dashboard.
+ *
+ * Un solo acento. Sin gradientes. Sin segundo color de marca.
  */
 
 @theme {
   /* --- Tinta -------------------------------------------------------------
-   * No es negro: es petróleo tan oscuro que pasa por negro. Sobre papel da
-   * 16.2:1. Los dos atenuados reemplazan a las opacidades sueltas (ink/68,
-   * /70, /72) que antes cada componente elegía a ojo.
-   *   ink-muted   6.72:1 sobre papel · 5.98:1 sobre caliza
-   *   ink-subtle  5.20:1 sobre papel · 4.62:1 sobre caliza
-   */
-  --color-ink: oklch(0.215 0.026 219);
-  --color-ink-muted: oklch(0.455 0.024 219);
-  --color-ink-subtle: oklch(0.515 0.022 219);
-
-  /* --- Petróleo ----------------------------------------------------------
-   * El color de la marca. petrol sobre papel da 8.88:1, así que sirve para
-   * texto real y no solo para adornos. Las dos versiones profundas son las
-   * zonas oscuras por las que pasa el scroll. */
-  --color-petrol: oklch(0.385 0.068 212);
-  --color-petrol-deep: oklch(0.255 0.048 214);
-  --color-petrol-deeper: oklch(0.175 0.034 216);
-  --color-petrol-wash: oklch(0.905 0.021 210);
+   * La superficie de marca. ink-950 es el near-black de los bloques macizos;
+   * el resto de la rampa es estructura y texto atenuado. */
+  --color-ink-950: #0a0a0c;
+  --color-ink-900: #121316;
+  --color-ink-800: #1c1e22;
+  --color-ink-700: #2a2d33;
+  --color-ink-500: #6b6f76;
+  --color-ink-300: #a8acb3;
+  --color-ink-100: #e4e6e9;
 
   /* --- Papel -------------------------------------------------------------
-   * Tres superficies, no una. El sitio antes era un solo plano de cream y por
-   * eso se sentía estático: al hacer scroll no cambiaba nada. Ahora las
-   * secciones alternan papel / caliza / petróleo profundo. */
-  --color-paper: oklch(0.975 0.004 210);
-  --color-limestone: oklch(0.935 0.008 208);
+   * Off-white cálido para las zonas de lectura. paper-0 es blanco puro y se
+   * reserva para tarjetas sobre papel, no para el fondo de página. */
+  --color-paper-0: #ffffff;
+  --color-paper-50: #f7f6f3;
+  --color-paper-100: #efeee9;
 
-  /* --- Latón -------------------------------------------------------------
-   * El único color cálido, y aparece poco a propósito: marca lo que está
-   * activo o lo que es secuencia, nunca decora.
+  /* --- Ámbar -------------------------------------------------------------
+   * El único acento. Aparece poco y siempre significa algo.
    *
-   * CUIDADO: brass sobre papel da 2.93:1, así que hoy solo se usa como regla,
-   * borde y fondo de botón — nunca como texto sobre claro. Sobre oscuro sí
-   * llega (5.98:1 sobre petrol-deeper), y de ahí que el botón de la banda de
-   * cierre lleve texto petrol-deeper encima de latón.
-   *
-   * Si alguna vez necesitas latón como texto sobre papel, no bajes la opacidad
-   * de este: agrega una variante oscurecida (oklch(0.545 0.098 72) da 4.70:1) y
-   * anótala acá. Sobre caliza esa misma variante baja a 4.18:1 — ahí solo sirve
-   * para texto grande. */
-  --color-brass: oklch(0.66 0.105 78);
+   * CUIDADO con cuál usás: amber-500 es color de RELLENO (fondo de botón,
+   * regla, borde, glow) — sobre papel no llega a contraste de texto. Para
+   * ÁMBAR COMO TEXTO sobre claro existe amber-700 (#a35a00), que sí llega.
+   * Esa distinción es la que sostienen --text-accent y --surface-accent más
+   * abajo: no la saltes escribiendo amber-500 en un `text-`. */
+  --color-amber-050: #fff4de;
+  --color-amber-300: #ffd27a;
+  --color-amber-500: #ffb020;
+  --color-amber-600: #e69200;
+  --color-amber-700: #a35a00;
 
-  /* Texto sobre las zonas oscuras. */
-  --color-on-dark: oklch(0.965 0.006 210);
-  --color-on-dark-muted: oklch(0.795 0.014 210);
+  /* --- Semánticos --------------------------------------------------------
+   * Solo estado, nunca decoración. */
+  --color-success: #2fbf71;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+
+  /* Los pares fondo/texto de los estados. El DS los tenía escritos a mano
+   * dentro de Badge.jsx y nunca llegaron a tokens/colors.css; suben acá para
+   * que ningún componente vuelva a hardcodear un hex de estado. */
+  --color-success-tint: #e7f9ee;
+  --color-success-ink: #1a7a45;
+  --color-danger-tint: #fdecec;
+  --color-danger-ink: #b91c1c;
+
+  /* --- Roles ---------------------------------------------------------------
+   * Preferí SIEMPRE estos sobre las rampas crudas: dicen para qué sirve el
+   * color, no cuál es. Cambiar la marca debería ser cambiar la rampa, no
+   * cazar `bg-ink-950` por todo el repo. */
+  --color-surface-page: var(--color-paper-50);
+  --color-surface-card: var(--color-paper-0);
+  --color-surface-sunken: var(--color-paper-100);
+  --color-surface-inverse: var(--color-ink-950);
+  --color-surface-inverse-raised: var(--color-ink-900);
+
+  --color-text-primary: var(--color-ink-950);
+  --color-text-secondary: var(--color-ink-700);
+  --color-text-muted: var(--color-ink-500);
+  --color-text-on-inverse: var(--color-paper-0);
+  --color-text-on-inverse-muted: var(--color-ink-300);
+
+  --color-text-accent: var(--color-amber-700);
+  --color-surface-accent: var(--color-amber-500);
+  --color-surface-accent-hover: var(--color-amber-600);
+  --color-surface-accent-tint: var(--color-amber-050);
+
+  /* Sobre oscuro los bordes son blanco de baja opacidad, no un gris sólido:
+   * un gris sólido sobre near-black se lee como una línea sucia. */
+  --color-border-subtle: var(--color-ink-100);
+  --color-border-default: var(--color-ink-300);
+  --color-border-inverse: rgba(255, 255, 255, 0.12);
+
+  --color-focus-ring: var(--color-amber-500);
 
   /* --- Tipografía --------------------------------------------------------
-   * Fraunces para el display: es variable y trae los ejes opsz, SOFT y WONK,
-   * que son los que le dan carácter en tamaño grande (la 'g' de caja única y
-   * las terminaciones inclinadas). Instrument Sans para todo lo demás.
+   * Tres familias, cada una con un trabajo:
+   *   Sora            display/titulares — grotesca geométrica, tech
+   *   IBM Plex Sans   cuerpo y UI — neutra, muy legible
+   *   Space Mono      etiquetas y eyebrows — SIEMPRE mayúscula + tracking
    *
-   * La escala se abrió bastante arriba: el display llega a 92px donde antes
-   * llegaba a 58. Un titular que ocupa espacio es la diferencia más barata
-   * entre un sitio que se ve caro y uno que no.
-   */
-  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+   * Las variables --font-sora/-plex/-mono las inyecta next/font en layout.tsx.
+   * El DS las cargaba por @import de Google Fonts; acá se self-hostean vía
+   * next/font, que es lo mismo sin el salto de layout ni el request extra. */
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, monospace;
 
-  --text-display: clamp(42px, 7.2vw, 92px);
-  --text-display--line-height: 0.98;
-  --text-display--letter-spacing: -0.032em;
-  --text-display--font-weight: 400;
+  /* Escala del DS. Los tres tamaños grandes van envueltos en clamp() con el
+   * valor del DS como techo: la escala fija del DS desbordaba en móvil, y el
+   * techo sigue siendo exactamente el que define el sistema. */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: clamp(2.25rem, 5.2vw, 3rem);
+  --text-5xl: clamp(2.75rem, 6.4vw, 4rem);
+  --text-6xl: clamp(3rem, 8vw, 5.5rem);
 
-  --text-h1: clamp(34px, 5.2vw, 62px);
-  --text-h1--line-height: 1.04;
-  --text-h1--letter-spacing: -0.026em;
-  --text-h1--font-weight: 400;
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
 
-  --text-h2: clamp(26px, 3.3vw, 40px);
-  --text-h2--line-height: 1.12;
-  --text-h2--letter-spacing: -0.018em;
-  --text-h2--font-weight: 400;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
 
-  --text-h3: 20px;
-  --text-h3--line-height: 1.3;
-  --text-h3--letter-spacing: -0.01em;
-  --text-h3--font-weight: 500;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.08em;
 
-  --text-lead: clamp(17px, 1.35vw, 21px);
-  --text-lead--line-height: 1.6;
+  /* --- Espacio -----------------------------------------------------------
+   * Base 4px. Coincide con el default de Tailwind, así que la escala 1..32 del
+   * DS sale sola de las utilidades (p-4 = 16px, etc.) y no hace falta
+   * redeclararla. Lo único propio es el ancho de contenido. */
+  --container-site: 1200px;
 
-  --text-body: 16.5px;
-  --text-body--line-height: 1.72;
+  /* --- Radios ------------------------------------------------------------
+   * Modestos y consistentes: la marca se lee filosa y técnica, no blanda. */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
 
-  --text-small: 15px;
-  --text-small--line-height: 1.6;
-
-  --text-micro: 13px;
-  --text-micro--line-height: 1.45;
+  /* --- Sombras -----------------------------------------------------------
+   * Suaves y neutras sobre claro. La única sombra de color es el glow ámbar,
+   * y está reservada a UN elemento destacado por pantalla (el plan
+   * recomendado). Si aparece dos veces en una página, deja de significar. */
+  --shadow-sm: 0 1px 2px rgba(10, 10, 12, 0.06);
+  --shadow-md: 0 4px 12px rgba(10, 10, 12, 0.08);
+  --shadow-lg: 0 12px 32px rgba(10, 10, 12, 0.14);
+  --shadow-glow-amber: 0 0 0 1px rgba(255, 176, 32, 0.4),
+    0 8px 24px rgba(255, 176, 32, 0.25);
 
   /* --- Movimiento --------------------------------------------------------
-   * Dos curvas: una para respuestas a un clic o un hover (rápida, seca) y otra
-   * para el movimiento ambiental del hero (larguísima, nunca acelera). */
-  --ease-brand: cubic-bezier(0.2, 0.7, 0.3, 1);
-  --ease-drift: cubic-bezier(0.45, 0, 0.55, 1);
-  --duration-brand: 220ms;
+   * Una sola curva, ease-out, sin rebote. El movimiento es un detalle de
+   * terminación, nunca el centro de atención. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 360ms;
+
+  /* --- Escala semántica --------------------------------------------------
+   * Nombres por rol sobre los tamaños de arriba. La escala cruda del design
+   * system da el tamaño y nada más; un titular necesita además peso, interlínea
+   * y tracking, y si eso se escribe suelto en cada componente termina
+   * divergiendo. Los tamaños son los del sistema — esto solo los nombra.
+   *
+   * Preferí `text-h2` sobre `text-3xl`: dice qué es, no cuánto mide. */
+  --text-h1: var(--text-4xl);
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h1--font-weight: 700;
+
+  --text-h2: var(--text-3xl);
+  --text-h2--line-height: 1.25;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h2--font-weight: 700;
+
+  --text-h3: var(--text-xl);
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.02em;
+  --text-h3--font-weight: 600;
+
+  --text-lead: var(--text-lg);
+  --text-lead--line-height: 1.65;
+
+  --text-body: var(--text-base);
+  --text-body--line-height: 1.65;
+
+  --text-small: var(--text-sm);
+  --text-small--line-height: 1.5;
+
+  --text-micro: var(--text-xs);
+  --text-micro--line-height: 1.5;
 }
 
-/* Fraunces tiene ejes propios; sin esto se renderiza en su posición neutra y
- * pierde justo lo que la hace distinta de cualquier otra serif. opsz alto
- * afina las astas para tamaños grandes; WONK activa las formas inclinadas. */
-@utility font-display {
-  font-family: var(--font-serif);
-  font-variation-settings: "SOFT" 12, "WONK" 1, "opsz" 96;
+/* Eyebrow/etiqueta en mono. El DS es explícito: el mono como etiqueta va
+ * siempre en mayúscula y con tracking abierto — en caja baja y junto se lee
+ * como un bug de fuente, no como una decisión. */
+@utility label-mono {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  font-size: var(--text-xs);
 }
 
-/* La misma serif en tamaño de párrafo necesita lo contrario: opsz bajo y sin
- * WONK, o las astas finas desaparecen. */
-@utility font-display-text {
-  font-family: var(--font-serif);
-  font-variation-settings: "SOFT" 20, "WONK" 0, "opsz" 20;
+/* El glow ámbar: el único efecto gráfico del sistema. UNO por pantalla. */
+@utility glow-amber {
+  box-shadow: var(--shadow-glow-amber);
 }
 
-/* Transición estándar del sitio. */
+/* Transición estándar del sitio.
+ * Ojo: el DS pide que los estados de hover y de press sean un cambio de color
+ * sólido, nunca un fade de opacidad ni un scale — por eso `transform` ya no
+ * está en la lista de propiedades. */
 @utility transition-brand {
-  transition-property: color, background-color, border-color, opacity,
-    box-shadow, transform, letter-spacing;
-  transition-duration: var(--duration-brand);
-  transition-timing-function: var(--ease-brand);
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-out);
 }
 
-/* Anillo de foco único para todo lo enfocable: links, botones y controles. */
+/* Anillo de foco único para todo lo enfocable: links, botones y controles.
+ * El ámbar es el mismo sobre claro y sobre oscuro — se ve en los dos. */
 @utility focus-ring {
   &:focus-visible {
-    outline: 2px solid var(--color-petrol);
+    outline: 2px solid var(--color-focus-ring);
     outline-offset: 3px;
-    border-radius: 3px;
+    border-radius: var(--radius-sm);
   }
 }
 
-/* Igual, sobre las zonas oscuras, donde el petróleo no se ve. */
-@utility focus-ring-inverse {
-  &:focus-visible {
-    outline: 2px solid var(--color-brass);
-    outline-offset: 3px;
-    border-radius: 3px;
-  }
+/* Regla fina del sitio. Una sola definición para que todas las divisiones
+ * tengan el mismo peso; antes cada componente escribía su propio border-ink/10. */
+@utility rule {
+  border-color: var(--color-border-subtle);
 }
 
-/* --- Movimiento ambiental del hero ---------------------------------------
- * Dos manchas de luz con períodos distintos (38s y 53s) que no son múltiplos
- * entre sí, así que la combinación tarda mucho en repetirse y el fondo nunca
- * se lee como un loop. Es el único movimiento no disparado por el usuario en
- * todo el sitio.
- */
-@keyframes drift-a {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(-6%, 4%, 0) scale(1.14); }
-}
-
-@keyframes drift-b {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1.08); }
-  50% { transform: translate3d(7%, -5%, 0) scale(0.94); }
-}
-
-@utility drift-a {
-  animation: drift-a 38s var(--ease-drift) infinite;
-}
-
-@utility drift-b {
-  animation: drift-b 53s var(--ease-drift) infinite;
+/* Igual, sobre las zonas oscuras. */
+@utility rule-inverse {
+  border-color: var(--color-border-inverse);
 }
 
 /* Entrada del hero: un solo momento orquestado al cargar la página, no un
@@ -193,26 +265,17 @@
 
 @utility rise {
   opacity: 0;
-  animation: rise 760ms var(--ease-brand) forwards;
+  animation: rise var(--duration-slow) var(--ease-out) forwards;
   animation-delay: var(--rise-delay, 0ms);
 }
 
-/* Regla fina del sitio. Una sola definición para que todas las divisiones
- * tengan el mismo peso; antes cada componente escribía su propio border-ink/10. */
-@utility rule {
-  border-color: color-mix(in oklab, var(--color-ink) 14%, transparent);
-}
-
-
 ::selection {
-  background: var(--color-petrol-wash);
-  color: var(--color-ink);
+  background: var(--color-surface-accent-tint);
+  color: var(--color-text-primary);
 }
 
 html {
   scroll-behavior: smooth;
-  /* Deja que el navegador aplique opsz solo donde no lo fijamos a mano. */
-  font-optical-sizing: auto;
 }
 
 body {
@@ -247,13 +310,6 @@ body {
      contenido nunca dependa de que una animación corra. */
   .rise {
     opacity: 1;
-    animation: none !important;
-  }
-
-  /* La deriva del hero es infinita y puramente decorativa: se apaga de verdad,
-     en vez de quedar corriendo una iteración de 0.01ms. */
-  .drift-a,
-  .drift-b {
     animation: none !important;
   }
 }

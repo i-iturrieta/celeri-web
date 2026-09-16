@@ -32,7 +32,7 @@ export function buildJsonLd() {
     "@id": `${site.domain}/#person`,
     name: site.owner,
     jobTitle: "Diseñador y desarrollador web",
-    url: `${site.domain}/sobre-mi`,
+    url: site.domain,
     worksFor: { "@id": `${site.domain}/#business` },
     email: site.email,
   };

@@ -31,7 +31,7 @@ function MoreLink({ href, children }: { href: string; children: string }) {
   return (
     <Link
       href={href}
-      className="focus-ring transition-brand text-small whitespace-nowrap text-ink-muted underline decoration-ink/25 decoration-1 underline-offset-[6px] hover:text-petrol hover:decoration-2 hover:decoration-petrol"
+      className="focus-ring transition-brand text-small whitespace-nowrap text-text-secondary underline decoration-ink-950/25 decoration-1 underline-offset-[6px] hover:text-text-accent hover:decoration-2 hover:decoration-text-accent"
     >
       {children}
     </Link>
@@ -60,7 +60,7 @@ export default function HomePage() {
         </div>
       </Container>
 
-      <section className="border-y rule bg-limestone">
+      <section className="border-y rule bg-surface-sunken">
         <Container className="py-24 sm:py-28">
           <SectionHeading
             title="De la conversación al sitio publicado"

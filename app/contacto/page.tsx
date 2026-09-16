@@ -70,12 +70,12 @@ export default function ContactPage() {
                   : {})}
                 className="focus-ring group grid gap-x-12 gap-y-3 py-9 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] md:py-11"
               >
-                <p className="text-small text-ink-subtle">{channel.label}</p>
+                <p className="text-small text-text-muted">{channel.label}</p>
                 <div>
-                  <p className="transition-brand font-display text-h2 text-ink group-hover:text-petrol">
+                  <p className="transition-brand font-display text-h2 text-text-primary group-hover:text-text-accent">
                     {channel.value}
                   </p>
-                  <p className="mt-3 text-small text-ink-muted">
+                  <p className="mt-3 text-small text-text-secondary">
                     {channel.note}
                   </p>
                 </div>
@@ -88,7 +88,7 @@ export default function ContactPage() {
       {/* En papel, no en caliza: esta es la única página que no cierra con la
           banda oscura, así que una sección en caliza quedaba pegada al pie —
           que también es caliza — y las dos se leían como un solo bloque. */}
-      <section className="bg-paper">
+      <section className="bg-surface-page">
         <Container className="pb-24 sm:pb-28">
           <SectionHeading
             title="Si me escribes hoy, esto es lo que sigue"

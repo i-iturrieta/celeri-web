@@ -27,14 +27,14 @@ export default function ProcessSteps() {
               borde de 1px, no debajo. */}
           <span
             aria-hidden="true"
-            className="absolute -top-px left-0 h-px w-12 bg-brass"
+            className="absolute -top-px left-0 h-px w-12 bg-surface-accent"
           />
 
-          <p className="font-display-text text-small tabular-nums text-ink-subtle">
+          <p className="font-display text-small tabular-nums text-text-muted">
             {String(i + 1).padStart(2, "0")}
           </p>
-          <h3 className="mt-4 text-h3 text-ink">{step.title}</h3>
-          <p className="mt-3 max-w-[42ch] text-small text-ink-muted">
+          <h3 className="mt-4 text-h3 text-text-primary">{step.title}</h3>
+          <p className="mt-3 max-w-[42ch] text-small text-text-secondary">
             {step.description}
           </p>
         </li>

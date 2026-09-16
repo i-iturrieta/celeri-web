@@ -43,7 +43,7 @@ export default function CasesPage() {
       </Container>
 
       {demoCases.length > 0 && (
-        <section className="border-t rule bg-limestone">
+        <section className="border-t rule bg-surface-sunken">
           <Container className="py-24 sm:py-28">
             <SectionHeading
               title="Ejemplos que construí por mi cuenta"

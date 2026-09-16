@@ -6,8 +6,9 @@ export type ProcessStep = {
 /**
  * Cómo se trabaja, en cuatro pasos.
  *
- * Esto vivía como un párrafo enterrado en Sobre mí. Quien entra al home y no
- * conoce el rubro necesita saber en qué se está metiendo antes de escribir.
+ * Quien entra al home y no conoce el rubro necesita saber en qué se está
+ * metiendo antes de escribir. Con Sobre mí fuera del sitio, este bloque es el
+ * único lugar donde se explica cómo es trabajar conmigo.
  */
 export const process: ProcessStep[] = [
   {

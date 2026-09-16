@@ -18,13 +18,13 @@ type PageHeaderProps = {
  */
 export default function PageHeader({ title, lead, children }: PageHeaderProps) {
   return (
-    <section className="border-b rule bg-limestone">
+    <section className="border-b rule bg-surface-sunken">
       <Container className="pt-16 pb-16 sm:pt-24 sm:pb-20">
-        <h1 className="font-display max-w-[16ch] text-h1 text-balance text-ink">
+        <h1 className="font-display max-w-[16ch] text-h1 text-balance text-text-primary">
           {title}
         </h1>
         {lead && (
-          <p className="mt-7 max-w-[56ch] text-lead text-ink-muted">{lead}</p>
+          <p className="mt-7 max-w-[56ch] text-lead text-text-secondary">{lead}</p>
         )}
         {children}
       </Container>

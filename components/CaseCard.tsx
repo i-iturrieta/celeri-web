@@ -47,7 +47,7 @@ export default function CaseCard({
            el lector de pantalla lee el caso duplicado. */
         aria-hidden="true"
         tabIndex={-1}
-        className={`relative aspect-[16/10] overflow-hidden bg-limestone ${
+        className={`relative aspect-[16/10] overflow-hidden bg-surface-sunken ${
           reverse ? "lg:order-2" : ""
         }`}
       >
@@ -65,21 +65,21 @@ export default function CaseCard({
 
       <div className={reverse ? "lg:order-1" : ""}>
         {caseStudy.kind === "demo" && (
-          <p className="mb-5 inline-block border rule px-2.5 py-1 text-micro text-ink-subtle">
+          <p className="mb-5 inline-block border rule px-2.5 py-1 text-micro text-text-muted">
             Ejemplo, no es un cliente
           </p>
         )}
 
-        <Heading className="font-display text-h2 text-balance text-ink">
+        <Heading className="font-display text-h2 text-balance text-text-primary">
           <Link
             href={detailHref}
-            className="focus-ring transition-brand decoration-1 underline-offset-[7px] hover:text-petrol hover:underline"
+            className="focus-ring transition-brand decoration-1 underline-offset-[7px] hover:text-text-accent hover:underline"
           >
             {caseStudy.client}
           </Link>
         </Heading>
 
-        <p className="mt-5 max-w-[52ch] text-body text-ink-muted">
+        <p className="mt-5 max-w-[52ch] text-body text-text-secondary">
           {caseStudy.summary}
         </p>
 
@@ -89,7 +89,7 @@ export default function CaseCard({
             ficha. */}
         <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-1.5 border-t rule pt-5">
           {caseStudy.tags.map((tag) => (
-            <li key={tag} className="text-micro text-ink-subtle">
+            <li key={tag} className="text-micro text-text-muted">
               {tag}
             </li>
           ))}
@@ -98,7 +98,7 @@ export default function CaseCard({
         <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-3">
           <Link
             href={detailHref}
-            className="focus-ring transition-brand text-small font-medium text-ink underline decoration-ink/30 decoration-1 underline-offset-[6px] hover:text-petrol hover:decoration-2 hover:decoration-petrol"
+            className="focus-ring transition-brand text-small font-medium text-text-primary underline decoration-ink-950/30 decoration-1 underline-offset-[6px] hover:text-text-accent hover:decoration-2 hover:decoration-text-accent"
           >
             Ver el caso completo
           </Link>
@@ -106,7 +106,7 @@ export default function CaseCard({
             href={caseStudy.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="focus-ring transition-brand inline-flex items-center gap-1.5 text-small text-ink-subtle hover:text-petrol"
+            className="focus-ring transition-brand inline-flex items-center gap-1.5 text-small text-text-muted hover:text-text-accent"
           >
             Visitar sitio
             {/* Este ícono sí dice algo: el link se va del sitio. */}

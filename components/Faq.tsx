@@ -14,10 +14,10 @@ export default function Faq() {
     <div className="border-b rule">
       {faq.map((item) => (
         <details key={item.question} className="group border-t rule">
-          <summary className="focus-ring transition-brand relative flex cursor-pointer list-none items-start justify-between gap-8 py-6 text-h3 text-ink hover:text-petrol [&::-webkit-details-marker]:hidden">
+          <summary className="focus-ring transition-brand relative flex cursor-pointer list-none items-start justify-between gap-8 py-6 text-h3 text-text-primary hover:text-text-accent [&::-webkit-details-marker]:hidden">
             <span
               aria-hidden="true"
-              className="transition-brand absolute -top-px left-0 h-px w-12 bg-brass opacity-0 group-open:opacity-100"
+              className="transition-brand absolute -top-px left-0 h-px w-12 bg-surface-accent opacity-0 group-open:opacity-100"
             />
             <span className="max-w-[52ch]">{item.question}</span>
 
@@ -27,11 +27,11 @@ export default function Faq() {
               aria-hidden="true"
               className="relative mt-2.5 block h-3 w-3 shrink-0"
             >
-              <span className="absolute top-1/2 left-0 h-px w-3 -translate-y-1/2 bg-ink-subtle" />
-              <span className="transition-brand absolute top-0 left-1/2 h-3 w-px -translate-x-1/2 bg-ink-subtle group-open:scale-y-0" />
+              <span className="absolute top-1/2 left-0 h-px w-3 -translate-y-1/2 bg-ink-500" />
+              <span className="transition-brand absolute top-0 left-1/2 h-3 w-px -translate-x-1/2 bg-ink-500 group-open:scale-y-0" />
             </span>
           </summary>
-          <p className="max-w-[64ch] pb-7 text-body text-ink-muted">
+          <p className="max-w-[64ch] pb-7 text-body text-text-secondary">
             {item.answer}
           </p>
         </details>
