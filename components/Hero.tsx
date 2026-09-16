@@ -6,6 +6,31 @@ import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { Button } from "@/components/ui";
 
 /**
+ * Los datos duros de la portada.
+ *
+ * Dos, no tres, y es una decisión tomada — no un hueco pendiente. El tercero
+ * natural sería el plazo de entrega, y se descartó porque varía demasiado de
+ * proyecto a proyecto: un número que en la práctica cambia no es un dato duro,
+ * es una promesa que después hay que sostener por WhatsApp. Un rango vago
+ * ("2 a 8 semanas") tampoco dice nada y encima resta.
+ *
+ * Los dos que quedan se sostienen solos: el primero sale de content/cases.ts y
+ * el segundo es la promesa que hace la bajada ("diseño y programo yo mismo").
+ *
+ * Ese "1" además carga ahora con un trabajo que antes hacía el titular, cuando
+ * decía "hechos por una sola persona". Ahí sonaba a disculpa — abría hablando
+ * de lo chico. Como número en una ficha se lee como lo que es: un dato.
+ *
+ * La reja es `sm:grid-cols-3` con la tercera celda vacía a propósito: alinea
+ * las reglas verticales con la franja de clientes de abajo. No la bajes a
+ * `grid-cols-2` para "arreglar" el hueco.
+ */
+const STATS = [
+  { value: String(clientCases.length), label: "negocios en línea" },
+  { value: "1", label: "persona, de principio a fin" },
+];
+
+/**
  * Portada del home.
  *
  * Es uno de los tres bloques oscuros macizos que el design system nombra
@@ -21,38 +46,20 @@ import { Button } from "@/components/ui";
  * El titular se lleva todo el presupuesto tipográfico y lo de alrededor se
  * mantiene callado a propósito.
  */
-/**
- * Los datos duros de la portada.
- *
- * Dos, no tres, y es una decisión tomada — no un hueco pendiente. El tercero
- * natural sería el plazo de entrega, y se descartó porque varía demasiado de
- * proyecto a proyecto: un número que en la práctica cambia no es un dato duro,
- * es una promesa que después hay que sostener por WhatsApp. Un rango vago
- * ("2 a 8 semanas") tampoco dice nada y encima resta.
- *
- * Los dos que quedan se sostienen solos: el primero sale de content/cases.ts y
- * el segundo es la promesa que ya hace el titular.
- *
- * La reja es `sm:grid-cols-3` con la tercera celda vacía a propósito: alinea
- * las reglas verticales con la franja de clientes de abajo. No la bajes a
- * `grid-cols-2` para "arreglar" el hueco.
- */
-const STATS = [
-  { value: String(clientCases.length), label: "negocios en línea" },
-  { value: "1", label: "persona, de principio a fin" },
-];
-
 export default function Hero() {
   return (
     <section className="bg-surface-inverse">
       <Container className="pt-20 pb-16 sm:pt-28 sm:pb-24">
         {/* El eyebrow en mono es el recurso del sistema para las etiquetas, y
-            acá además dice algo útil: que hay disponibilidad. */}
+            acá además dice algo útil: que estás tomando trabajo. Dice "tomando"
+            y no "disponible" a propósito — "disponible" señala tiempo libre, o
+            sea poca demanda; "tomando" dice que ya estás trabajando y que igual
+            entra uno más. */}
         <p
           className="rise label-mono text-surface-accent"
           style={{ "--rise-delay": "0ms" } as React.CSSProperties}
         >
-          {"// disponible para proyectos"}
+          {"// tomando proyectos nuevos"}
         </p>
 
         <h1
@@ -63,7 +70,7 @@ export default function Hero() {
           className="rise font-display mt-5 max-w-[16ch] text-5xl leading-tight font-bold tracking-tighter text-balance text-text-on-inverse"
           style={{ "--rise-delay": "60ms" } as React.CSSProperties}
         >
-          Sitios web simples, hechos por una sola persona
+          Sitios web que hacen una sola cosa: que te escriban
         </h1>
 
         <p

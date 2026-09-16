@@ -10,12 +10,16 @@ export const OG_CONTENT_TYPE = "image/png";
  * renderiza fuera del navegador, sin la hoja de estilos del sitio. Son los
  * mismos valores que los tokens de app/globals.css — si cambias la paleta allá,
  * estos hay que moverlos a mano.
+ *
+ * Eso fue exactamente lo que pasó: se quedaron en la paleta "petróleo y latón"
+ * cuando el sitio ya había pasado a tinta y ámbar, y las cuatro tarjetas de
+ * compartir estuvieron mostrando una marca que ya no existe. Si volvés a mover
+ * la rampa en globals.css, volvé acá en el mismo commit.
  */
-const PETROL_DEEPER = "#00141a";
-const PETROL = "#004d59";
-const ON_DARK = "#eff5f6";
-const ON_DARK_SUBTLE = "#8c9a9c";
-const BRASS = "#b58a41";
+const INK = "#0a0a0c";
+const ON_DARK = "#ffffff";
+const ON_DARK_SUBTLE = "#a8acb3";
+const AMBER = "#ffb020";
 
 /**
  * Genera la imagen de compartir de una página.
@@ -41,16 +45,17 @@ export function renderOgImage({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: PETROL_DEEPER,
-          backgroundImage: `radial-gradient(120% 110% at 88% 0%, ${PETROL} 0%, transparent 60%)`,
+          backgroundColor: INK,
           padding: "76px 84px",
           fontFamily: "sans-serif",
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {/* La regla de latón: la misma marca que en el sitio señala dónde
-              empieza algo. */}
-          <div style={{ width: 84, height: 3, backgroundColor: BRASS }} />
+          {/* La regla ámbar: la misma marca que en el sitio señala dónde
+              empieza algo. El degradado radial que había detrás se fue: el
+              sistema prohíbe los gradientes, y la tarjeta tiene que parecerse
+              al bloque oscuro macizo que el visitante abre al hacer clic. */}
+          <div style={{ width: 84, height: 3, backgroundColor: AMBER }} />
           <div
             style={{
               marginTop: 30,
@@ -80,7 +85,12 @@ export function renderOgImage({
             display: "flex",
             alignItems: "baseline",
             justifyContent: "space-between",
-            fontSize: 26,
+            gap: 40,
+            /* 24 y no 26: el tagline es la línea más larga de la tarjeta y a 26
+               llegaba a tres píxeles del borde. Cabía acá y podía no caber en
+               el render de producción, donde la fuente de reserva puede
+               resolver distinto. */
+            fontSize: 24,
             color: ON_DARK_SUBTLE,
           }}
         >

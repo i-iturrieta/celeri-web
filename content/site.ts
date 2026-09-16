@@ -1,7 +1,16 @@
 export const site = {
   name: "Celeri",
   owner: "Ignacio Iturrieta",
-  tagline: "Sitios web simples para negocios pequeños",
+  /**
+   * La bajada de una línea. La usan la meta description por defecto, el
+   * JSON-LD y el pie de las tarjetas de compartir, así que tiene que
+   * sostenerse sola, fuera de contexto.
+   *
+   * Dice qué hace el sitio, no cómo es. Antes decía "sitios web simples": el
+   * adjetivo buscaba señalar "sin sobreingeniería" pero llegaba como "poca
+   * cosa", y era lo primero que leía alguien evaluando si contratarte.
+   */
+  tagline: "Sitios web para negocios pequeños que hacen que te escriban",
   whatsapp: "56964308294",
   email: "ignacio@celeri.cl",
   domain: "https://celeri.cl",

@@ -11,11 +11,18 @@ import ServiceList from "@/components/ServiceList";
 import CTASection from "@/components/CTASection";
 import ProcessSteps from "@/components/ProcessSteps";
 
-const DESCRIPTION = `Diseño y desarrollo de sitios web para negocios pequeños: páginas simples y rápidas que llevan a los visitantes a escribirte por WhatsApp.`;
+/* El titular lleva el gancho y esto lo sostiene: se lee en el resultado de
+   Google, donde compite con otros nueve. Arranca por lo que la persona buscó
+   —"sitios web para negocios pequeños"— y recién después promete. 150
+   caracteres, que es lo que Google alcanza a mostrar. */
+const DESCRIPTION = `Diseño y programo sitios web para negocios pequeños que hacen una sola cosa: que te escriban por WhatsApp. Converso contigo antes de diseñar nada.`;
 
 export const metadata: Metadata = {
   title: {
-    absolute: `${site.name} — Sitios web simples para negocios pequeños`,
+    /* Más corto que el tagline a propósito: Google corta los títulos cerca de
+       los 60 caracteres, y lo que no puede faltar es lo que la gente escribe
+       en el buscador. El gancho va en la descripción, que tiene más aire. */
+    absolute: `${site.name} — Sitios web para negocios pequeños`,
   },
   description: DESCRIPTION,
   alternates: { canonical: "/" },
