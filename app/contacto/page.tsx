@@ -53,7 +53,7 @@ export default function ContactPage() {
     <>
       <PageHeader
         title="Hablemos"
-        lead="Nada de formularios que caen en un buzón que nadie revisa: escríbeme directo. Los primeros 15 minutos de conversación son gratis y sin compromiso."
+        lead="Escríbeme directo: el mensaje me llega a mí y te respondo yo. Los primeros 15 minutos de conversación son gratis y sin compromiso."
       />
 
       {/* Dos vías, no más. Un formulario propio agregaba un punto de falla

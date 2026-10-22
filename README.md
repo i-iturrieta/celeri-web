@@ -71,14 +71,12 @@ que son código muerto — antes de escribir un control a mano, mirá si ya est�
 
 ## Precios
 
-Viven en `content/pricing.ts`. Los montos se guardan como número (`basePrice`) y
-se formatean con `formatCLP`; los descuentos se guardan como porcentaje
-(`discountPct`) y el monto final lo calcula `finalPrice()`, para que la etiqueta
-y el precio no puedan decir cosas distintas.
+Viven en `content/pricing.ts`. Los montos se guardan como número (`price`) y se
+formatean con `formatCLP`.
 
-**Hay una promoción activa que no se apaga sola.** Es texto fijo, sin lógica de
-fechas: en noviembre hay que borrar los `discountPct` de los planes y la
-constante `PROMO_PERIOD`. Está anotado en el archivo.
+No hay promoción activa. La de septiembre y octubre de 2026 se sacó entera,
+junto con su cálculo de descuentos; si vuelve una, está en el historial de git.
+`PricingCard` sigue aceptando `originalPrice` y `badge` para mostrarla.
 
 ## Contacto
 

@@ -64,9 +64,14 @@ export default function PricingCard({
       </div>
 
       <div>
-        <p className="flex items-baseline gap-1.5">
+        {/* `flex-wrap`: entre md y ~1250px las tres tarjetas quedan angostas y
+            el precio más "pago único" no cabe en una línea. Sin wrap, el
+            periodo se salía de la tarjeta y la página entera ganaba scroll
+            horizontal. Con wrap baja a la línea siguiente — y como los
+            precios son tabulares, baja en las tres tarjetas a la vez. */}
+        <p className="flex flex-wrap items-baseline gap-x-1.5 gap-y-1">
           {/* `tabular-nums` fuerza el mismo ancho para todos los dígitos. Sin
-              esto, $110.000 y $336.000 ocupan anchos distintos y los tres
+              esto, $110.000 y $420.000 ocupan anchos distintos y los tres
               precios no alinean entre tarjetas — que es justo lo que el
               visitante está haciendo cuando mira esta sección: compararlos. */}
           <span className="font-display text-4xl font-extrabold tabular-nums">
