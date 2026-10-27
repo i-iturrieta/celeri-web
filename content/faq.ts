@@ -17,7 +17,7 @@ export const faq: FaqItem[] = [
   {
     question: "¿Cuánto demora tener mi sitio listo?",
     answer:
-      "Una landing page o un hub de redes toma entre una y dos semanas. Una web informativa con catálogo, entre dos y cuatro. Lo que más mueve el plazo no es el desarrollo: es cuánto demoras tú en pasarme los textos y las fotos. Si llegas con el material listo, los plazos se acortan.",
+      "Una landing page toma entre una y dos semanas. Una web informativa con catálogo, entre dos y cuatro. Lo que más mueve el plazo no es el desarrollo: es cuánto demoras tú en pasarme los textos y las fotos. Si llegas con el material listo, los plazos se acortan.",
   },
   {
     question: "¿Quién paga el dominio y el hosting?",

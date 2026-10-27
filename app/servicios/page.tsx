@@ -12,7 +12,7 @@ import CTASection from "@/components/CTASection";
 import Faq from "@/components/Faq";
 import JsonLd from "@/components/JsonLd";
 
-const DESCRIPTION = `Landing pages, hub de redes, agendadores y webs informativas para negocios pequeños.`;
+const DESCRIPTION = `Landing pages, webs con catálogo, agendadores y posicionamiento local para negocios pequeños.`;
 
 export const metadata: Metadata = {
   title: "Servicios",

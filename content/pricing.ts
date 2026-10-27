@@ -43,6 +43,7 @@ export const plans: Plan[] = [
       "Una página, enfocada en que te escriban",
       "Diseño a medida, no una plantilla",
       "Botón directo a WhatsApp",
+      "Un link para tu bio que reúne todas tus redes",
       "Andando en móvil y en computador",
       "Publicación incluida, con el dominio a tu nombre",
     ],

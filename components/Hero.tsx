@@ -8,25 +8,25 @@ import { Button } from "@/components/ui";
 /**
  * Los datos duros de la portada.
  *
- * Dos, no tres, y es una decisión tomada — no un hueco pendiente. El tercero
- * natural sería el plazo de entrega, y se descartó porque varía demasiado de
- * proyecto a proyecto: un número que en la práctica cambia no es un dato duro,
- * es una promesa que después hay que sostener por WhatsApp. Un rango vago
- * ("2 a 8 semanas") tampoco dice nada y encima resta.
+ * Queda uno solo. "Negocios en línea" salió en octubre 2026: con tres casos el
+ * número leía como poca trayectoria y no como un dato. El "1" se queda porque
+ * es el posicionamiento (diseño y programo yo mismo), la promesa que hace la
+ * bajada.
  *
- * Los dos que quedan se sostienen solos: el primero sale de content/cases.ts y
- * el segundo es la promesa que hace la bajada ("diseño y programo yo mismo").
+ * El tercero natural sería el plazo de entrega, y se descartó porque varía
+ * demasiado de proyecto a proyecto: un número que en la práctica cambia no es
+ * un dato duro, es una promesa que después hay que sostener por WhatsApp. Un
+ * rango vago ("2 a 8 semanas") tampoco dice nada y encima resta.
  *
- * Ese "1" además carga ahora con un trabajo que antes hacía el titular, cuando
+ * Ese "1" además carga con un trabajo que antes hacía el titular, cuando
  * decía "hechos por una sola persona". Ahí sonaba a disculpa — abría hablando
  * de lo chico. Como número en una ficha se lee como lo que es: un dato.
  *
- * La reja es `sm:grid-cols-3` con la tercera celda vacía a propósito: alinea
+ * La reja es `sm:grid-cols-3` con las otras celdas vacías a propósito: alinea
  * las reglas verticales con la franja de clientes de abajo. No la bajes a
  * `grid-cols-2` para "arreglar" el hueco.
  */
 const STATS = [
-  { value: String(clientCases.length), label: "negocios en línea" },
   { value: "1", label: "persona, de principio a fin" },
 ];
 
@@ -114,11 +114,11 @@ export default function Hero() {
           className="rise"
           style={{ "--rise-delay": "420ms" } as React.CSSProperties}
         >
-          {/* Tres columnas en desktop aunque hoy los datos sean dos: así las
+          {/* Tres columnas en desktop aunque hoy el dato sea uno: así las
               reglas verticales caen en el mismo sitio que las de la franja de
               clientes de abajo, y las dos filas comparten una reja visible en
-              vez de ser dos bandas sueltas. La tercera celda, vacía, es donde
-              entra el plazo cuando se confirme. */}
+              vez de ser dos bandas sueltas. Las celdas vacías son donde entra
+              el plazo cuando se confirme. */}
           <dl className="grid grid-cols-2 border-t border-border-inverse sm:grid-cols-3 sm:divide-x sm:divide-border-inverse">
             {STATS.map((stat, i) => (
               <div

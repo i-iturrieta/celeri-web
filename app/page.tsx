@@ -66,7 +66,7 @@ export default function HomePage() {
         <SectionHeading
           title="En qué puedo ayudarte"
           subtitle="Cada uno responde a un problema puntual que me han contado en conversaciones reales."
-          aside={<MoreLink href="/servicios">Ver los cinco servicios</MoreLink>}
+          aside={<MoreLink href="/servicios">Ver todos los servicios y precios</MoreLink>}
         />
         <div className="mt-12">
           <ServiceList services={services.slice(0, 3)} detail="compact" />
