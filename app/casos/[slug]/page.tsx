@@ -28,6 +28,15 @@ export async function generateMetadata({
   if (!caseStudy) return {};
 
   const title = `${caseStudy.client} — caso`;
+  /* La tarjeta de compartir es un archivo estático de public/og/casos/,
+   * generado por `npm run og:cases`. Como ruta dinámica daba 500 en Vercel
+   * (ver el comentario de scripts/og-cases.mjs). */
+  const ogImage = {
+    url: `/og/casos/${caseStudy.slug}.png`,
+    width: 1200,
+    height: 630,
+    alt: `${caseStudy.client} — caso de ${site.name}`,
+  };
   return {
     title,
     description: caseStudy.summary,
@@ -36,7 +45,9 @@ export async function generateMetadata({
       title: `${title} | ${site.name}`,
       description: caseStudy.summary,
       url: `${site.domain}/casos/${caseStudy.slug}`,
+      images: [ogImage],
     },
+    twitter: { card: "summary_large_image", images: [ogImage] },
   };
 }
 

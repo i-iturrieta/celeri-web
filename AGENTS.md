@@ -291,9 +291,14 @@ del header, no un símbolo aparte.
   `npm run icons -- --sheet=/ruta.png` deja una hoja de contacto para mirarlos.
 - **Las fuentes de las imágenes generadas** viven en `assets/fonts/` y van en
   woff, no woff2: satori no lee woff2. Son las mismas tres familias del sitio.
-- **Las tarjetas de compartir** salen de `lib/og.tsx`. La de cada caso
-  (`app/casos/[slug]/opengraph-image.tsx`) recodifica el PNG con paleta para
-  quedar bajo ~300KB, que es lo que WhatsApp tolera. Revisá el peso al tocarla.
+- **Las tarjetas de compartir** salen de `lib/og.tsx`. Las de las páginas se
+  generan en el build; **las de los casos son PNG estáticos** en
+  `public/og/casos/`, que deja `npm run og:cases`. Fueron un
+  `opengraph-image.tsx` por caso y en Vercel respondían 500 (en local
+  andaban): no lo vuelvas a convertir en ruta. Corré `npm run og:cases` al
+  agregar un caso o cambiar su captura o sus etiquetas. Se recodifican con
+  paleta para quedar bajo ~300KB, que es lo que WhatsApp tolera; el script
+  avisa si alguna se pasa.
 - **Los colores de `lib/og.tsx`, `scripts/icons.mjs` y `app/manifest.ts` son
   copias en hex de los tokens.** Si mueves la paleta en `globals.css`, se mueven
   los cuatro juntos.

@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "smoke": "node scripts/smoke.mjs",
     "shots": "node --no-warnings=MODULE_TYPELESS_PACKAGE_JSON scripts/shots.mjs",
-    "icons": "node scripts/icons.mjs"
+    "icons": "node scripts/icons.mjs",
+    "og:cases": "node scripts/og-cases.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.24.0",
@@ -25,6 +26,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
+    "jiti": "^2.7.0",
     "playwright": "^1.63.0",
     "sharp": "^0.35.4",
     "tailwindcss": "^4",
