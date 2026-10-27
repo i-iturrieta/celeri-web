@@ -125,7 +125,24 @@ no por cuánto espacio parece necesitar:
 agregalo allá con un nombre que diga su rol.
 
 En el home: servicios `tight` (sigue al hero), proceso `base` (su banda caliza
-ya lo separa), casos `loose`.
+ya lo separa), casos `loose`, Navaja `base` (la separa una regla, `border-t`).
+
+## Orden de casos y Navaja
+
+- **`cases` va ordenado por fuerza del caso, no por fecha.** El primero es el
+  más fuerte. `featuredCases` (los tres primeros de `clientCases`) es lo que
+  muestran el inicio y la franja del hero: la franja es una reja de tres
+  columnas y la vitrina pierde fuerza si se alarga. `/casos` muestra todos.
+- **Boat Market queda solo en `/casos` por ahora.** Es el cuarto, y eso es lo
+  que lo deja fuera del inicio. Si cambiás el orden, cambiás quién entra.
+- **Navaja es un proyecto propio, no un caso.** Vive en `content/navaja.ts` y se
+  muestra en su propia sección (`NavajaShowcase`), nunca mezclada con las
+  tarjetas de cliente: sin `ViewTransition`, sin `CaseOutline`, y nunca como
+  botón `primary` (el primario del inicio es el del hero). Su captura sale de
+  `npm run shots -- navaja`.
+- **No la llames "código abierto".** El repo es privado. Es "gratis" y "sin
+  cuenta", que es lo que es.
+- Es un sitio externo: no va en el nav ni en el sitemap.
 
 ## Transiciones de vista
 

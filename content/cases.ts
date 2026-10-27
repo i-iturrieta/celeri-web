@@ -34,29 +34,8 @@ export type CaseStudy = {
   kind: "client" | "demo";
 };
 
+/* El orden es a propósito: el caso más fuerte primero, no el más reciente. */
 export const cases: CaseStudy[] = [
-  {
-    slug: "mirador-propiedades",
-    client: "Mirador Propiedades",
-    url: "https://www.miradorpropiedades.cl/",
-    kind: "client",
-    summary:
-      "Antes de dibujar una sola pantalla, dediqué tiempo a entender cómo se mueve una propiedad desde que está disponible hasta que se reserva — porque eso, no un catálogo bonito, era lo que el sitio tenía que resolver.",
-    sector: "corredora de propiedades",
-    image: "/cases/mirador-hero.webp",
-    tags: [
-      "Panel de administración a medida",
-      "Catálogo con filtros y mapa",
-      "Gestión de leads (email + WhatsApp)",
-      "SEO técnico (sitemap dinámico)",
-    ],
-    problem:
-      "Las propiedades se publicaban a mano en redes sociales y se coordinaban por WhatsApp una por una. No había un lugar donde un interesado pudiera filtrar por comuna, precio o tipo de propiedad, así que cada consulta empezaba de cero — y las propiedades ya arrendadas seguían generando mensajes semanas después.",
-    work:
-      "Antes de diseñar nada seguí el recorrido completo de una propiedad, desde que entra disponible hasta que se reserva. De ahí salió un panel de administración donde se publica y se da de baja sin depender de mí, un catálogo con filtros y mapa, y un formulario que deja el lead en el correo y en WhatsApp al mismo tiempo. El sitio se acompañó de sitemap dinámico para que cada propiedad nueva entre sola a Google.",
-    result:
-      "El equipo publica y actualiza propiedades sin intermediarios, y las consultas llegan filtradas: quien escribe ya vio precio, ubicación y fotos.",
-  },
   {
     slug: "waiki-chile",
     client: "Waiki Chile",
@@ -78,6 +57,50 @@ export const cases: CaseStudy[] = [
       "Rehice el sitio desde cero, pero sin partir de cero el contenido: reutilicé la marca, las fotos y los textos que ya existían, y trabajé sobre cómo se ordenan y cómo se llega a ellos. El resultado es una navegación más directa a los cuatro equipos, un catálogo con accesorios e instalaciones separados, y una calculadora de ahorro que responde la pregunta que todos hacen antes de comprar.",
     result:
       "El sitio proyecta una imagen mucho más actual, funciona bien en celular y el recorrido hasta el producto es más corto y más claro que antes.",
+  },
+  {
+    slug: "sur-design",
+    client: "Sur Design",
+    url: "https://surdesign.cl/",
+    kind: "client",
+    summary:
+      "Un taller de muebles a medida que vende con los ojos: el sitio tenía que mostrar trabajo terminado y llevar a la cotización sin rodeos.",
+    sector: "muebles a medida",
+    image: "/cases/surdesign-hero.webp",
+    tags: [
+      "Portafolio por tipo de proyecto",
+      "Fotos de obra y renders separados",
+      "Cotización directa por WhatsApp",
+      "Proceso explicado en cinco pasos",
+    ],
+    problem:
+      "Una cocina a medida no se compra por catálogo: se compra después de ver trabajos parecidos y de entender cómo va a ser el proceso. Sur Design tenía los proyectos y el oficio, pero no un lugar propio donde mostrarlos ordenados y desde donde pedir una cotización.",
+    work:
+      "Armé el sitio alrededor del portafolio: cada proyecto con su tipo —cocina, clóset, mueble a medida— y los materiales que lleva, y con los renders 3D marcados como tales, separados de las fotos de obra terminada. El proceso se cuenta en cinco pasos, desde escuchar la idea hasta la instalación, y cada página termina en lo mismo: escribir con las medidas y una foto del espacio.",
+    result:
+      "Quien llega ve en un minuto qué tipo de trabajo hace Sur Design y escribe sabiendo qué pedir: con medidas, una foto y un proyecto de referencia.",
+  },
+  {
+    slug: "mirador-propiedades",
+    client: "Mirador Propiedades",
+    url: "https://www.miradorpropiedades.cl/",
+    kind: "client",
+    summary:
+      "Antes de dibujar una sola pantalla, dediqué tiempo a entender cómo se mueve una propiedad desde que está disponible hasta que se reserva — porque eso, no un catálogo bonito, era lo que el sitio tenía que resolver.",
+    sector: "corredora de propiedades",
+    image: "/cases/mirador-hero.webp",
+    tags: [
+      "Panel de administración a medida",
+      "Catálogo con filtros y mapa",
+      "Gestión de leads (email + WhatsApp)",
+      "SEO técnico (sitemap dinámico)",
+    ],
+    problem:
+      "Las propiedades se publicaban a mano en redes sociales y se coordinaban por WhatsApp una por una. No había un lugar donde un interesado pudiera filtrar por comuna, precio o tipo de propiedad, así que cada consulta empezaba de cero — y las propiedades ya arrendadas seguían generando mensajes semanas después.",
+    work:
+      "Antes de diseñar nada seguí el recorrido completo de una propiedad, desde que entra disponible hasta que se reserva. De ahí salió un panel de administración donde se publica y se da de baja sin depender de mí, un catálogo con filtros y mapa, y un formulario que deja el lead en el correo y en WhatsApp al mismo tiempo. El sitio se acompañó de sitemap dinámico para que cada propiedad nueva entre sola a Google.",
+    result:
+      "El equipo publica y actualiza propiedades sin intermediarios, y las consultas llegan filtradas: quien escribe ya vio precio, ubicación y fotos.",
   },
   {
     slug: "boat-market",
@@ -104,6 +127,11 @@ export const cases: CaseStudy[] = [
 ];
 
 export const clientCases = cases.filter((c) => c.kind === "client");
+
+/* El orden de `cases` es por fuerza del caso, no cronológico. El inicio y la
+ * franja del hero muestran solo los tres primeros: la franja es una reja de
+ * tres columnas y la vitrina pierde fuerza si se alarga. /casos muestra todos. */
+export const featuredCases = clientCases.slice(0, 3);
 export const demoCases = cases.filter((c) => c.kind === "demo");
 
 export function getCase(slug: string): CaseStudy | undefined {

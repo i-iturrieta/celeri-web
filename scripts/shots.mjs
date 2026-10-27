@@ -13,6 +13,9 @@
  * La lista de sitios NO se escribe acá: sale de content/cases.ts, que es la
  * única fuente de verdad de los casos. Node 24 importa el .ts directo.
  *
+ * Los proyectos propios (hoy solo Navaja, de content/navaja.ts) entran por la
+ * misma receta: `npm run shots -- navaja`. Su captura va a public/proyectos/.
+ *
  * Uso: npm run shots            (todos)
  *      npm run shots -- waiki   (solo los slugs que contengan "waiki")
  */
@@ -23,9 +26,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { cases } from "../content/cases.ts";
+import { navaja } from "../content/navaja.ts";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const OUT_DIR = path.join(ROOT, "public", "cases");
 
 /**
  * La receta. Todo lo que hace que las tres capturas sean comparables está acá
@@ -51,21 +54,29 @@ const WEBP_QUALITY = 80;
 const NAV_TIMEOUT = 45_000;
 const SETTLE_MS = 1_500;
 
+/* Casos de clientes y proyectos propios comparten receta; solo cambia de dónde
+ * sale la lista. Cada uno trae `slug`, `url` e `image`, que es todo lo que se usa. */
+const all = [
+  ...cases,
+  { slug: navaja.slug, client: navaja.name, url: navaja.url, image: navaja.image },
+];
+
 const filter = process.argv.slice(2).filter((a) => !a.startsWith("-"));
 const targets = filter.length
-  ? cases.filter((c) => filter.some((f) => c.slug.includes(f)))
-  : cases;
+  ? all.filter((c) => filter.some((f) => c.slug.includes(f)))
+  : all;
 
 if (targets.length === 0) {
   console.error(
-    `Ningún caso coincide con ${filter.join(", ")}. Slugs: ${cases
+    `Ningún caso coincide con ${filter.join(", ")}. Slugs: ${all
       .map((c) => c.slug)
       .join(", ")}`,
   );
   process.exit(1);
 }
 
-await mkdir(OUT_DIR, { recursive: true });
+for (const dir of new Set(targets.map((t) => path.dirname(t.image))))
+  await mkdir(path.join(ROOT, "public", dir), { recursive: true });
 
 const browser = await chromium.launch();
 const context = await browser.newContext({

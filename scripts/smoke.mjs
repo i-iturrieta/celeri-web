@@ -19,6 +19,7 @@ const CHECKS = [
   ["/casos", 200],
   ["/casos/mirador-propiedades", 200],
   ["/casos/waiki-chile", 200],
+  ["/casos/sur-design", 200],
   ["/casos/boat-market", 200],
   ["/contacto", 200],
   ["/sitemap.xml", 200],

@@ -5,6 +5,7 @@ import Container from "@/components/Container";
 import PageHeader from "@/components/PageHeader";
 import SectionHeading from "@/components/SectionHeading";
 import CaseCard from "@/components/CaseCard";
+import NavajaShowcase from "@/components/NavajaShowcase";
 import CTASection from "@/components/CTASection";
 
 const DESCRIPTION = `Sitios web que he construido para negocios pequeños: qué problema tenían, qué hice y qué cambió después.`;
@@ -41,6 +42,8 @@ export default function CasesPage() {
           ))}
         </div>
       </Container>
+
+      <NavajaShowcase />
 
       {demoCases.length > 0 && (
         <section className="border-t rule bg-surface-sunken">

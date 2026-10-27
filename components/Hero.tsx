@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { waLink } from "@/lib/whatsapp";
-import { clientCases } from "@/content/cases";
+import { featuredCases } from "@/content/cases";
 import Container from "@/components/Container";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { Button } from "@/components/ui";
@@ -109,7 +109,7 @@ export default function Hero() {
           El bloque oscuro del hero no admite gradientes ni texturas — el
           sistema los prohíbe por nombre — así que lo único que puede darle
           peso es estructura visible. Las reglas son esa estructura. */}
-      {clientCases.length > 0 && (
+      {featuredCases.length > 0 && (
         <Container
           className="rise"
           style={{ "--rise-delay": "420ms" } as React.CSSProperties}
@@ -144,7 +144,7 @@ export default function Hero() {
               En línea ahora mismo
             </p>
             <ul className="mt-5 grid gap-y-5 sm:grid-cols-3 sm:gap-y-0 sm:divide-x sm:divide-border-inverse">
-              {clientCases.map((c) => (
+              {featuredCases.map((c) => (
                 <li key={c.slug} className="sm:px-8 sm:first:pl-0 sm:last:pr-0">
                   <Link
                     href={`/casos/${c.slug}`}

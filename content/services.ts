@@ -10,7 +10,19 @@ export type Service = {
 // El hub de redes salió como servicio suelto (octubre 2026) porque competía con
 // Linktree y bajaba el precio percibido de todo lo demás; ahora va incluido en
 // el plan Landing.
+// El orden va del servicio que más se parece a un proyecto completo al de entrada,
+// porque el inicio muestra los tres primeros y el primero ancla el precio percibido.
 export const services: Service[] = [
+  {
+    slug: "web-informativa",
+    title: "Web informativa",
+    teaser: "Un catálogo claro con todo lo que vendes, listo para compartir.",
+    problem:
+      "No tienes dónde mostrar todos tus productos o servicios con el detalle, fotos y precios que la gente pide antes de comprar.",
+    outcome:
+      "Un catálogo claro y fácil de navegar que responde las preguntas típicas antes de que las hagan.",
+    icon: "Store",
+  },
   {
     slug: "landing-page",
     title: "Landing page",
@@ -30,16 +42,6 @@ export const services: Service[] = [
     outcome:
       "Tus clientes reservan solos desde el celular, tu agenda queda ordenada y tú dejas de perseguir horarios.",
     icon: "CalendarCheck",
-  },
-  {
-    slug: "web-informativa",
-    title: "Web informativa",
-    teaser: "Un catálogo claro con todo lo que vendes, listo para compartir.",
-    problem:
-      "No tienes dónde mostrar todos tus productos o servicios con el detalle, fotos y precios que la gente pide antes de comprar.",
-    outcome:
-      "Un catálogo claro y fácil de navegar que responde las preguntas típicas antes de que las hagan.",
-    icon: "Store",
   },
   {
     slug: "seo-local",

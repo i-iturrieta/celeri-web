@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { services } from "@/content/services";
-import { clientCases } from "@/content/cases";
+import { featuredCases } from "@/content/cases";
 import { site } from "@/content/site";
 import Container from "@/components/Container";
 import Hero from "@/components/Hero";
@@ -10,6 +10,7 @@ import CaseCard from "@/components/CaseCard";
 import ServiceList from "@/components/ServiceList";
 import CTASection from "@/components/CTASection";
 import ProcessSteps from "@/components/ProcessSteps";
+import NavajaShowcase from "@/components/NavajaShowcase";
 
 /* El titular lleva el gancho y esto lo sostiene: se lee en el resultado de
    Google, donde compite con otros nueve. Arranca por lo que la persona buscó
@@ -54,7 +55,8 @@ function MoreLink({ href, children }: { href: string; children: string }) {
  * El ritmo vertical tampoco es parejo, y también a propósito (ver las
  * utilidades `section-*` en globals.css). Servicios entra `tight` porque sigue
  * la conversación del hero; el proceso va `base` y ya viene separado por su
- * propia banda; los casos van `loose` porque son la vitrina. Cuando las tres
+ * propia banda; los casos van `loose` porque son la vitrina; Navaja va `base`,
+ * separada de los casos por una regla, porque es una nota al margen. Cuando las tres
  * corrían al mismo `py-24 sm:py-28`, el scroll sonaba a metrónomo.
  */
 export default function HomePage() {
@@ -85,7 +87,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {clientCases.length > 0 && (
+      {featuredCases.length > 0 && (
         <Container as="section" className="section-loose">
           <SectionHeading
             title="Negocios que ya están usando su sitio"
@@ -93,7 +95,7 @@ export default function HomePage() {
             aside={<MoreLink href="/casos">Ver todos los casos</MoreLink>}
           />
           <div className="mt-16 flex flex-col gap-24 sm:gap-28">
-            {clientCases.map((c, i) => (
+            {featuredCases.map((c, i) => (
               <CaseCard
                 key={c.slug}
                 caseStudy={c}
@@ -104,6 +106,8 @@ export default function HomePage() {
           </div>
         </Container>
       )}
+
+      <NavajaShowcase />
 
       <CTASection variant="band" />
     </>
