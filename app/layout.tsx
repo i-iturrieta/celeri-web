@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Sora, IBM_Plex_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -38,6 +38,13 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
   display: "swap",
 });
+
+/* El header es tinta maciza: con este color el cromo del navegador móvil
+ * (barra de estado, barra de direcciones) sigue de largo en vez de cortar el
+ * bloque oscuro con una franja blanca. Hex copiado de `surface-inverse`. */
+export const viewport: Viewport = {
+  themeColor: "#0a0a0c",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),

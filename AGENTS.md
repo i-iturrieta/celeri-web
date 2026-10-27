@@ -277,3 +277,23 @@ contenido real.
 
 **Se tomó el lenguaje visual del kit y se conservó todo lo de `content/`.** Si
 re-sincronizás desde el design system, no traigas su copy.
+
+## Íconos y tarjetas de compartir
+
+La marca en tamaño chico es la "c" del wordmark en Sora 700, blanca, más el
+punto ámbar, sobre tinta. Es la misma letra y el mismo punto que el `Wordmark`
+del header, no un símbolo aparte.
+
+- **Los íconos son archivos estáticos** (`app/favicon.ico`, `app/icon1.png`,
+  `app/icon2.png`, `app/apple-icon.png` y `public/icons/` para el manifest). Se
+  regeneran con `npm run icons`; no los edites a mano. Los tamaños chicos se
+  componen aparte (punto más grande, más aire) en vez de achicar el grande.
+  `npm run icons -- --sheet=/ruta.png` deja una hoja de contacto para mirarlos.
+- **Las fuentes de las imágenes generadas** viven en `assets/fonts/` y van en
+  woff, no woff2: satori no lee woff2. Son las mismas tres familias del sitio.
+- **Las tarjetas de compartir** salen de `lib/og.tsx`. La de cada caso
+  (`app/casos/[slug]/opengraph-image.tsx`) recodifica el PNG con paleta para
+  quedar bajo ~300KB, que es lo que WhatsApp tolera. Revisá el peso al tocarla.
+- **Los colores de `lib/og.tsx`, `scripts/icons.mjs` y `app/manifest.ts` son
+  copias en hex de los tokens.** Si mueves la paleta en `globals.css`, se mueven
+  los cuatro juntos.

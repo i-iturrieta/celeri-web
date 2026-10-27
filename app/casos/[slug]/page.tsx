@@ -36,7 +36,6 @@ export async function generateMetadata({
       title: `${title} | ${site.name}`,
       description: caseStudy.summary,
       url: `${site.domain}/casos/${caseStudy.slug}`,
-      images: [{ url: caseStudy.image }],
     },
   };
 }
