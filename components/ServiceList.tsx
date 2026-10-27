@@ -45,13 +45,15 @@ export default function ServiceList({
              plantilla, el teaser de una línea arrancaba recién al 40% del
              ancho y dejaba un vacío en medio de la fila que la hacía parecer
              sin terminar. */
-          className={`grid gap-x-12 gap-y-4 border-t rule py-9 md:py-11 ${
+          className={`grid grid-cols-[minmax(0,1fr)] gap-x-12 gap-y-4 border-t rule py-9 md:py-11 ${
             detail === "compact"
               ? "md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
               : "md:grid-cols-[minmax(0,6fr)_minmax(0,11fr)]"
           }`}
         >
-          <Heading className="font-display text-h2 text-balance text-text-primary">
+          {/* `hyphens-auto` porque "Posicionamiento" en text-h2 es más ancho que
+              una pantalla de 320px; con lang="es" corta donde corresponde. */}
+          <Heading className="font-display text-h2 text-balance hyphens-auto text-text-primary">
             {service.title}
           </Heading>
 

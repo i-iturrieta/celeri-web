@@ -64,7 +64,7 @@ export const cases: CaseStudy[] = [
     url: "https://surdesign.cl/",
     kind: "client",
     summary:
-      "Un taller de muebles a medida que vende con los ojos: el sitio tenía que mostrar trabajo terminado y llevar a la cotización sin rodeos.",
+      "Un portafolio de cocinas, clósets y muebles a medida, con los materiales de cada proyecto y la cotización a un mensaje de distancia.",
     sector: "muebles a medida",
     image: "/cases/surdesign-hero.webp",
     tags: [
@@ -74,11 +74,11 @@ export const cases: CaseStudy[] = [
       "Proceso explicado en cinco pasos",
     ],
     problem:
-      "Una cocina a medida no se compra por catálogo: se compra después de ver trabajos parecidos y de entender cómo va a ser el proceso. Sur Design tenía los proyectos y el oficio, pero no un lugar propio donde mostrarlos ordenados y desde donde pedir una cotización.",
+      "Una cocina a medida no se compra por catálogo: quien cotiza quiere ver trabajos parecidos, saber con qué materiales se hacen y entender cómo va a ser el proceso antes de escribir.",
     work:
-      "Armé el sitio alrededor del portafolio: cada proyecto con su tipo —cocina, clóset, mueble a medida— y los materiales que lleva, y con los renders 3D marcados como tales, separados de las fotos de obra terminada. El proceso se cuenta en cinco pasos, desde escuchar la idea hasta la instalación, y cada página termina en lo mismo: escribir con las medidas y una foto del espacio.",
+      "Armé el sitio alrededor del portafolio: cada proyecto con su tipo —cocina, clóset, mueble a medida— y los materiales que lleva, y con los renders 3D marcados como tales, separados de las fotos de obra terminada. El proceso se cuenta en cinco pasos, desde escuchar la idea hasta la instalación, y el portafolio cierra pidiendo lo que hace falta para cotizar: las medidas aproximadas y una foto del espacio.",
     result:
-      "Quien llega ve en un minuto qué tipo de trabajo hace Sur Design y escribe sabiendo qué pedir: con medidas, una foto y un proyecto de referencia.",
+      "El sitio muestra once proyectos con sus materiales, separa lo construido de lo que es propuesta, y deja la cotización a mano desde cualquier página, por WhatsApp o por correo.",
   },
   {
     slug: "mirador-propiedades",

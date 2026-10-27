@@ -68,11 +68,13 @@ export default function ContactPage() {
                 {...(channel.external
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
-                className="focus-ring group grid gap-x-12 gap-y-3 py-9 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] md:py-11"
+                className="focus-ring group grid grid-cols-[minmax(0,1fr)] gap-x-12 gap-y-3 py-9 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] md:py-11"
               >
                 <p className="text-small text-text-muted">{channel.label}</p>
                 <div>
-                  <p className="transition-brand font-display text-h2 text-text-primary group-hover:text-text-accent">
+                  {/* `break-words`: el correo en text-h2 no cabe en 320px y no tiene
+                      dónde cortar solo. */}
+                  <p className="transition-brand font-display text-h2 break-words text-text-primary group-hover:text-text-accent">
                     {channel.value}
                   </p>
                   <p className="mt-3 text-small text-text-secondary">
