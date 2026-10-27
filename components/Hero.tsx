@@ -70,7 +70,7 @@ export default function Hero() {
           className="rise font-display mt-5 max-w-[16ch] text-5xl leading-tight font-bold tracking-tighter text-balance text-text-on-inverse"
           style={{ "--rise-delay": "60ms" } as React.CSSProperties}
         >
-          Sitios web que hacen una sola cosa: que te escriban
+          Sitios web a medida, del diseño al código
         </h1>
 
         <p

@@ -10,7 +10,7 @@ export const site = {
    * adjetivo buscaba señalar "sin sobreingeniería" pero llegaba como "poca
    * cosa", y era lo primero que leía alguien evaluando si contratarte.
    */
-  tagline: "Sitios web para negocios pequeños que hacen que te escriban",
+  tagline: "Diseño y desarrollo de sitios web a medida",
   whatsapp: "56964308294",
   email: "ignacio@celeri.cl",
   domain: "https://celeri.cl",

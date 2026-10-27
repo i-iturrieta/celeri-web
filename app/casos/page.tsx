@@ -8,7 +8,7 @@ import CaseCard from "@/components/CaseCard";
 import NavajaShowcase from "@/components/NavajaShowcase";
 import CTASection from "@/components/CTASection";
 
-const DESCRIPTION = `Sitios web que he construido para negocios pequeños: qué problema tenían, qué hice y qué cambió después.`;
+const DESCRIPTION = `Sitios web que he diseñado y programado: qué necesitaba cada cliente, qué hice y cómo quedó.`;
 
 export const metadata: Metadata = {
   title: "Casos",

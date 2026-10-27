@@ -12,7 +12,7 @@ import type { MetadataRoute } from "next";
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Celeri — Sitios web para negocios pequeños",
+    name: "Celeri — Diseño y desarrollo web",
     short_name: "celeri",
     start_url: "/",
     display: "browser",
